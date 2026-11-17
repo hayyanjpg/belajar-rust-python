@@ -32,28 +32,28 @@ belajar-rust/
 4. Standard library & tooling: venv, pip, pytest
 5. Spesialisasi: data analysis, web dev, automation, database
 
-## ✅ Progress Checklist (Updated: 2026-11-16)
+## Progress Checklist (Updated: 2026-11-16)
 
-### Python - Tahap 1 & 2 (Fondasi & Struktur Data) ✅
+### Python - Tahap 1 & 2 (Fondasi & Struktur Data) 
 - [x] 01_variabel.py - Variabel, tipe data, casting, konstanta (+ 5 latihan)
 - [x] 02_percabangan.py - if/elif/else, ternary, match-case (+ 6 latihan)
 - [x] 03_perulangan.py - for/while, enumerate, break/continue, nested
 - [x] 04_fungsi.py - Fungsi, *args, **kwargs, default, rekursif
 - [x] 05_list_dict.py - List, dict, comprehension, nested dict
 
-### Python - Tahap 3 (OOP & Modularisasi) ✅
+### Python - Tahap 3 (OOP & Modularisasi) 
 - [x] 06_oop_class.py - Class, inheritance, polymorphism, ABC, composition, magic methods
 - [x] 07_file_handling.py - JSON, CSV, text, binary, pathlib, context manager
 - [x] 08_dekorator_generator.py - Decorator, generator, coroutine, itertools, contextlib
 
-### Rust - Tahap 1 (Fondasi) ✅
+### Rust - Tahap 1 (Fondasi) 
 - [x] 01_hello_world.rs - Print, format, debug (+ 6 latihan format)
 - [x] 02_variabel_mutability.rs - Mutability, shadowing, const, borrowing (+ 6 latihan)
 - [x] 03_tipe_data.rs - Scalar, compound, string, casting, operator
 - [x] 04_fungsi_return.rs - Function, return, expression, recursion
 - [x] 05_ownership.rs - Ownership, move, clone, borrow, slice
 
-### Rust - Tahap 2 (Konsep Inti) ✅
+### Rust - Tahap 2 (Konsep Inti) 
 - [x] 06_struct_method.rs - Struct, impl, method, builder pattern, trait impl
 - [x] 07_enum_match.rs - Enum, match, guard, @binding, if let, recursive enum
 - [x] 08_error_handling.rs - Result, Option, ?, custom error, combinators
