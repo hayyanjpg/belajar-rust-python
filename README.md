@@ -32,7 +32,7 @@ belajar-rust/
 4. Standard library & tooling: venv, pip, pytest
 5. Spesialisasi: data analysis, web dev, automation, database
 
-## Progress Checklist (Updated: 2026-11-16)
+## Progress Checklist (Updated: 2026-11-18)
 
 ### Python - Tahap 1 & 2 (Fondasi & Struktur Data) 
 - [x] 01_variabel.py - Variabel, tipe data, casting, konstanta (+ 5 latihan)
@@ -45,6 +45,9 @@ belajar-rust/
 - [x] 06_oop_class.py - Class, inheritance, polymorphism, ABC, composition, magic methods
 - [x] 07_file_handling.py - JSON, CSV, text, binary, pathlib, context manager
 - [x] 08_dekorator_generator.py - Decorator, generator, coroutine, itertools, contextlib
+- [x] 09_exception_handling.py - Exception handling, try/except, raise, custom error (+ 5 latihan)
+- [x] 10_module_package.py - Module, package, import, __init__.py, __name__ (+ 5 latihan)
+- [x] 11_testing.py - unittest, pytest, fixture, mocking, parameterize (+ 5 latihan)
 
 ### Rust - Tahap 1 (Fondasi) 
 - [x] 01_hello_world.rs - Print, format, debug (+ 6 latihan format)
@@ -61,7 +64,6 @@ belajar-rust/
 ### Selanjutnya (Planned)
 - [ ] Rust: Collections (Vec, HashMap), Iterator, Generics, Trait
 - [ ] Rust: Smart Pointer, Concurrency, Async
-- [ ] Python: Exception handling, Module/Package, Testing
 - [ ] Python: Stdlib (datetime, regex, collections), Type hints
 
 ## Cara Mulai
