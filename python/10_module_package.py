@@ -141,3 +141,60 @@ print(f"Latihan 4 - ceil(3.2)={ceil(3.2)}, floor(3.8)={floor(3.8)}, pow(2,3)={po
 
 
 print(f"Latihan 5 - Nama modul: {__name__}")
+
+# ============================================
+# LATIHAN TAMBAHAN 2 (Exercise 6-10)
+# ============================================
+
+print("\n=== LATIHAN TAMBAHAN 2 ===")
+
+
+# Latihan 6: Buat fungsi modular
+
+
+def hitung_rata_rata(*args):
+    if not args:
+        return 0
+    return sum(args) / len(args)
+
+
+print(f"Latihan 6 - Rata-rata (80,90,75): {hitung_rata_rata(80, 90, 75):.1f}")
+
+# Latihan 7: Gunakan modul os
+
+
+import os
+
+current_dir = os.getcwd()
+files = os.listdir(current_dir)
+print(f"Latihan 7 - File di current dir: {len(files)} file")
+
+# Latihan 8: Buat konstanta
+
+
+GRAVITASI_BUMI = 9.81  # m/s^2
+
+
+def hitung_kecepatan(jarak, waktu):
+    return jarak / waktu
+
+
+kecepatan = hitung_kecepatan(100, 10)
+print(f"Latihan 8 - Kecepatan: {kecepatan} m/s, G={GRAVITASI_BUMI}")
+
+# Latihan 9: Import multiple modules
+
+
+import sys
+import json
+
+data = {"nama": "Hayyan", "umur": 20}
+json_str = json.dumps(data)
+print(f"Latihan 9 - JSON: {json_str}")
+print(f"Latihan 9 - Python version: {sys.version_info.major}.{sys.version_info.minor}")
+
+# Latihan 10: Buat dan gunakan variabel global
+
+
+GLOBAL_KONSTANS = "Modul 10"
+print(f"Latihan 10 - {GLOBAL_KONSTANS} - Selesai!")
