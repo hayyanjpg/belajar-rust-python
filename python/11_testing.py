@@ -3,29 +3,14 @@
 # Python punya built-in unittest dan pytest framework yang populer.
 
 import unittest
-import pytest
+from unittest.mock import MagicMock
 
-# ============================================
-# 1. Pengenalan Testing
-# ============================================
-print("=== 1. Pengenalan Testing ===")
-
-# Testing dilakukan dengan:
-# - unittest (built-in)
-# - pytest (paling populer, perlu pip install pytest)
-
-# File test biasanya di folder tests/ atau prefix test_*.py
-
-# ============================================
-# 2. unittest - Built-in Testing Framework
-# ============================================
-print("\n=== 2. unittest ===")
-
-import unittest
 import pytest
 
 
-# Fungsi yang akan diuji
+# ============================================
+# 1. Fungsi yang akan diuji
+# ============================================
 def tambah(a, b):
     return a + b
 
@@ -35,12 +20,29 @@ def kurang(a, b):
 
 
 def faktorial(n):
+    if n < 0:
+        raise ValueError("n tidak boleh negatif")
     if n <= 1:
         return 1
     return n * faktorial(n - 1)
 
 
-# Class test
+def kali(a, b):
+    return a * b
+
+
+def bagi(a, b):
+    if b == 0:
+        raise ValueError("Tidak bisa membagi dengan nol")
+    return a / b
+
+
+# ============================================
+# 2. unittest - Built-in Testing Framework
+# ============================================
+# Jalankan dengan: python -m unittest python/11_testing.py -v
+
+
 class TestMatematika(unittest.TestCase):
     def test_tambah(self):
         self.assertEqual(tambah(2, 3), 5)
@@ -55,39 +57,22 @@ class TestMatematika(unittest.TestCase):
         self.assertEqual(faktorial(1), 1)
         self.assertEqual(faktorial(5), 120)
 
+    def test_faktorial_negatif(self):
+        with self.assertRaises(ValueError):
+            faktorial(-1)
+
     def test_tambah_type_error(self):
         with self.assertRaises(TypeError):
             tambah(2, "3")
 
 
-# Menjalankan test (hanya jika file dijalankan langsung)
-if __name__ == "__main__":
-    unittest.main()
-
 # ============================================
 # 3. pytest - Framework Testing Populer
 # ============================================
-print("\n=== 3. pytest ===")
-
 # pytest lebih sederhana dan fleksibel.
 # Install: pip install pytest
 # Tulis fungsi dengan prefix test_ dan gunakan assert.
-
-# Contoh fungsi yang diuji
-
-
-def kali(a, b):
-    return a * b
-
-
-def bagi(a, b):
-    if b == 0:
-        raise ValueError("Tidak bisa membagi dengan nol")
-    return a / b
-
-
-# Test dengan pytest (fungsi test_ dan assert)
-# Bisa dijalankan dengan: pytest python/11_testing.py
+# Jalankan dengan: pytest python/11_testing.py -v
 
 
 def test_kali():
@@ -104,40 +89,43 @@ def test_bagi():
 # ============================================
 # 4. Testing dengan Fixture
 # ============================================
-print("\n=== 4. Fixture ===")
-
-# Fixture adalah setup dan teardown yang bisa dipakai berulang.
+# Fixture adalah setup/teardown yang bisa dipakai berulang.
 
 
-def test_with_fixture():
-    data = [1, 2, 3, 4, 5]
-    assert len(data) == 5
-    assert sum(data) == 15
+@pytest.fixture
+def data_siswa():
+    """Setup data yang dipakai oleh beberapa test."""
+    return {"nama": "Hayyan", "nilai": [80, 90, 100]}
+
+
+def test_fixture_isi_data(data_siswa):
+    assert data_siswa["nama"] == "Hayyan"
+    assert len(data_siswa["nilai"]) == 3
+
+
+def test_fixture_rata_rata(data_siswa):
+    nilai = data_siswa["nilai"]
+    assert sum(nilai) / len(nilai) == 90
 
 
 # ============================================
 # 5. Mocking
 # ============================================
-print("\n=== 5. Mocking ===")
-
 # Mocking menggantikan dependency dengan objek tiruan.
 
 
 def test_mocking():
-    from unittest.mock import MagicMock
-
     mock = MagicMock()
     mock.halo.return_value = "Halo Mock!"
     assert mock.halo() == "Halo Mock!"
+    mock.halo.assert_called_once()
+
 
 # ============================================
 # LATIHAN TAMBAHAN (Exercise)
 # ============================================
 
-print("\n=== LATIHAN TAMBAHAN ===")
-
-
-# Latihan 1: Buat test untuk string
+# Latihan 1: Test untuk string
 
 
 def test_string_manipulation():
@@ -180,19 +168,24 @@ def test_kalkulator():
 
 
 # Latihan 4: Test dengan parameter
+# Decorator parametrize HARUS menempel pada fungsi test level modul,
+# bukan pada fungsi di dalam fungsi (kalau di dalam, test tidak pernah jalan).
 
 
-def test_parameter():
-    @pytest.mark.parametrize("a,b,expected", [
+@pytest.mark.parametrize(
+    "a,b,expected",
+    [
         (1, 2, 3),
         (2, 3, 5),
         (0, 0, 0),
-    ])
-    def _test(a, b, expected):
-        assert tambah(a, b) == expected
+        (-1, 1, 0),
+    ],
+)
+def test_tambah_parameter(a, b, expected):
+    assert tambah(a, b) == expected
 
 
-# Latihan 5: Test file handling
+# Latihan 5: Test file handling (fixture bawaan pytest: tmp_path)
 
 
 def test_file_handling(tmp_path):
@@ -200,3 +193,12 @@ def test_file_handling(tmp_path):
     file_path.write_text("Hello Testing")
     content = file_path.read_text()
     assert content == "Hello Testing"
+
+
+# ============================================
+# Menjalankan test (hanya jika file dijalankan langsung)
+# ============================================
+if __name__ == "__main__":
+    # exit=False supaya proses tidak langsung berhenti setelah unittest selesai
+    unittest.main(exit=False, verbosity=2)
+    print("\nSemua test pytest bisa dijalankan dengan: pytest python/11_testing.py -v")
