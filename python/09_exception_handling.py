@@ -2,6 +2,12 @@
 # Python menggunakan exception handling untuk menangani kesalahan yang terjadi saat runtime.
 # Struktur dasar: try, except, finally, raise, else.
 
+import tempfile
+from pathlib import Path
+
+# File sementara di folder temp OS, bukan di folder repo
+FILE_CONTOH = Path(tempfile.gettempdir()) / "belajar_python_contoh_tulis.txt"
+
 # ============================================
 # 1. try / except dasar
 # ============================================
@@ -147,7 +153,7 @@ except ValueError as e:
 
 print("\nLatihan 3 - Menulis file dengan with statement:")
 try:
-    with open("contoh_tulis.txt", "w") as f:
+    with open(FILE_CONTOH, "w") as f:
         f.write("Ini adalah contoh penulisan file.\n")
     print("  File tertulis.")
 except IOError as e:
@@ -158,13 +164,15 @@ except IOError as e:
 
 print("\nLatihan 4 - Membaca file:")
 try:
-    with open("contoh_tulis.txt", "r") as f:
+    with open(FILE_CONTOH, "r") as f:
         konten = f.read()
     print(f"  Konten: {konten.strip()}")
 except FileNotFoundError:
     print("  File tidak ditemukan.")
 except PermissionError:
     print("  Tidak ada izin membaca.")
+finally:
+    FILE_CONTOH.unlink(missing_ok=True)  # bersihkan file sementara
 
 # Latihan 5: Exception chaining
 

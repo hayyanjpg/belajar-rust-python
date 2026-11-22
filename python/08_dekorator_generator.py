@@ -351,11 +351,17 @@ if __name__ == "__main__":
 
     # 12. Context manager
     print("\n--- CONTEXTLIB @contextmanager ---")
-    with buka_file("test_cm.txt", "w") as f:
+    import tempfile
+    from pathlib import Path
+
+    tmp_file = Path(tempfile.gettempdir()) / "belajar_python_test_cm.txt"
+    with buka_file(tmp_file, "w") as f:
         f.write("Test context manager\nBaris kedua")
 
-    with buka_file("test_cm.txt", "r") as f:
+    with buka_file(tmp_file, "r") as f:
         print(f"Isi: {f.read()}")
+
+    tmp_file.unlink(missing_ok=True)  # bersihkan file sementara
 
     with timer_cm("Operasi berat"):
         time.sleep(0.05)
