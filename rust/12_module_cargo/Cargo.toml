@@ -1,0 +1,7 @@
+[package]
+name = "belajar_module"
+version = "0.1.0"
+edition = "2021"
+description = "Materi 12: module system dan Cargo untuk belajar Rust"
+
+[dependencies]
