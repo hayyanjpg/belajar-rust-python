@@ -75,10 +75,18 @@ belajar-rust-python/
 - [x] 10_iterator_closure.rs - Closure, adaptor, consumer, custom `Iterator`
 - [x] 11_generic_trait.rs - Generic function/struct, trait, bound, `dyn Trait`, operator overloading
 
+### Rust - Module, Lifetime & Cargo
+- [x] 12_module_cargo/ - Module system (`mod`, `use`, `pub`), nested module, Cargo project, unit test
+- [x] 13_lifetime.rs - Lifetime eksplisit, elision, struct ber-lifetime, `'static`, lifetime bound
+
+### Rust - Tahap 4 (Smart Pointer & Concurrency)
+- [x] 14_smart_pointer.rs - `Box`, `Rc`, `RefCell`, `Arc`, `Weak`
+- [x] 15_concurrency.rs - `thread`, `move` closure, `mpsc`, `Mutex`, `RwLock`, `Atomic`, `thread::scope`
+
 ### Selanjutnya (Planned)
-- [ ] Rust: Module system, `use`, visibilitas `pub`, Cargo project
-- [ ] Rust: Smart pointer (`Box`, `Rc`, `RefCell`, `Arc`), lifetimes
-- [ ] Rust: Concurrency (`thread`, `channel`), async/await
+- [ ] Rust: Async/await (`tokio`) dan pembahasan `Send`/`Sync` lebih dalam
+- [ ] Rust: Cargo workspace, feature flag, publish crate
+- [ ] Rust: CLI (`clap`) atau web API (`axum`)
 - [ ] Python: Tuple, set, dan unpacking lanjutan
 
 ## Cara Mulai
@@ -114,10 +122,15 @@ cd rust
 rustc --edition 2021 09_collections.rs -o collections
 ./collections            # Windows: .\collections.exe
 
-# Cek semua file sekaligus (PowerShell)
+# Cek semua file standalone (PowerShell)
 Get-ChildItem *.rs | ForEach-Object {
     rustc --edition 2021 $_.FullName -o "$env:TEMP\$($_.BaseName).exe"
 }
+
+# Materi 12 adalah project Cargo (bukan file tunggal)
+cd 12_module_cargo
+cargo run
+cargo test
 ```
 
 ## Catatan
@@ -125,4 +138,6 @@ Get-ChildItem *.rs | ForEach-Object {
 - Semua materi ditulis dengan komentar berbahasa Indonesia dan dilengkapi latihan.
 - File yang dibuat saat latihan (`data_latihan/`, file sementara) sudah diabaikan
   lewat `.gitignore`.
-- Materi Python 12-15 dan Rust 09-11 adalah lanjutan setelah tahap dasar.
+- Materi Python 12–16 dan Rust 09–15 adalah lanjutan setelah tahap dasar.
+- `rust/12_module_cargo/` adalah project Cargo; materi Rust lainnya adalah file
+  `.rs` tunggal yang bisa dikompilasi dengan `rustc`.
