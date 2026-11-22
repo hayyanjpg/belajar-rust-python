@@ -351,9 +351,9 @@ fn demo_external_crates_konsep() {
 // MAIN DEMO
 // ============================================
 fn main() {
-    println!("=" .repeat(50));
+    println!("{}", "=".repeat(50));
     println!("DEMO ERROR HANDLING RUST: RESULT, OPTION, ?, CUSTOM ERROR");
-    println!("=" .repeat(50));
+    println!("{}", "=".repeat(50));
 
     demo_option();
     demo_result();
