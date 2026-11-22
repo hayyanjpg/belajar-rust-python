@@ -76,6 +76,7 @@ fn main() {
         ipk: f32,
     }
     let mhs = Mahasiswa { nama: "Hayyan", nim: 2021001, ipk: 3.85 };
+    println!("Field    : nama={}, nim={}, ipk={}", mhs.nama, mhs.nim, mhs.ipk);
     println!("Debug    : {:?}", mhs);
     println!("Pretty   : {:#?}", mhs);
 

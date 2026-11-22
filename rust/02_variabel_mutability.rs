@@ -2,6 +2,8 @@
 // Penjelasan: Rust default-nya immutable (tidak bisa diubah). Gunakan `mut` untuk mutable.
 // Shadowing: mendeklarasikan variabel baru dengan nama yg sama (bisa beda tipe).
 
+use std::sync::atomic::{AtomicU32, Ordering};
+
 fn main() {
     let x = 5;
     println!("x = {}", x);
@@ -66,7 +68,7 @@ fn main() {
 
     // Latihan 2: Multiple mutable bindings & move semantics
     println!("\n=== Latihan 2: Mutable Binding & Move ===");
-    let mut s1 = String::from("Hello");
+    let s1 = String::from("Hello");
     let mut s2 = s1;  // move: s1 tidak valid lagi
     s2.push_str(", World");
     println!("s2 = {}", s2);
@@ -75,12 +77,12 @@ fn main() {
     // Latihan 3: Const vs static (static punya alamat memori tetap)
     println!("\n=== Latihan 3: Const vs Static ===");
     const PI: f64 = 3.14159265359;
-    static mut COUNTER: u32 = 0;  // mutable static butuh unsafe
-    unsafe {
-        COUNTER += 1;
-        println!("CONST PI = {}", PI);
-        println!("STATIC COUNTER (unsafe) = {}", COUNTER);
-    }
+    // Mutable static (`static mut`) butuh unsafe dan rawan race condition.
+    // Alternatif yang aman: atomic, bisa dipakai lintas thread tanpa unsafe.
+    static COUNTER: AtomicU32 = AtomicU32::new(0);
+    COUNTER.fetch_add(1, Ordering::SeqCst);
+    println!("CONST PI = {}", PI);
+    println!("STATIC COUNTER (atomic) = {}", COUNTER.load(Ordering::SeqCst));
 
     // Latihan 4: Type inference dengan anotasi eksplisit
     println!("\n=== Latihan 4: Type Inference ===");
@@ -107,12 +109,12 @@ fn main() {
     // Latihan 6: Mutable reference vs immutable reference
     println!("\n=== Latihan 6: Borrowing Rules ===");
     let mut data = vec![1, 2, 3];
-    let ref1 = &data;      // immutable borrow #1
-    let ref2 = &data;      // immutable borrow #2 (boleh banyak)
-    println!("Immutable refs: {:?}, {:?}", ref1, ref2);
-    // let mut_ref = &mut data; // ERROR: tidak bisa mutable borrow saat ada immutable
-    drop(ref1);
-    drop(ref2);
+    {
+        let ref1 = &data;      // immutable borrow #1
+        let ref2 = &data;      // immutable borrow #2 (boleh banyak)
+        println!("Immutable refs: {:?}, {:?}", ref1, ref2);
+    } // borrow berakhir di akhir scope ini
+    // let mut_ref = &mut data; // ERROR kalau masih ada immutable borrow aktif
     let mut_ref = &mut data; // OK sekarang
     mut_ref.push(4);
     println!("Mutable ref: {:?}", mut_ref);

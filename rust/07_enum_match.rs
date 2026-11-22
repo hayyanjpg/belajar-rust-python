@@ -316,14 +316,24 @@ fn main() {
 
     // 1. Enum dasar
     println!("\n--- ENUM DASAR ---");
-    let status = StatusMahasiswa::Aktif;
-    println!("Status: {:?} -> {}", status, cek_status(&status));
+    for status in [
+        StatusMahasiswa::Aktif,
+        StatusMahasiswa::Cuti,
+        StatusMahasiswa::Lulus,
+        StatusMahasiswa::DropOut,
+    ] {
+        println!("Status: {:?} -> {}", status, cek_status(&status));
+    }
 
-    let jurusan = Jurusan::Informatika;
-    println!("Jurusan: {:?} -> {}", jurusan, deskripsi_jurusan(&jurusan));
-
-    let jurusan2 = Jurusan::Lainnya("Bisnis Digital".to_string());
-    println!("Jurusan2: {:?} -> {}", jurusan2, deskripsi_jurusan(&jurusan2));
+    for jurusan in [
+        Jurusan::Informatika,
+        Jurusan::SistemInformasi,
+        Jurusan::TeknikInformatika,
+        Jurusan::IlmuKomputer,
+        Jurusan::Lainnya("Bisnis Digital".to_string()),
+    ] {
+        println!("Jurusan: {:?} -> {}", jurusan, deskripsi_jurusan(&jurusan));
+    }
 
     // 2. Enum dengan data
     println!("\n--- ENUM DENGAN DATA ---");
@@ -381,6 +391,8 @@ fn main() {
 
     // 9. Recursive enum
     println!("\n--- RECURSIVE ENUM (List) ---");
+    let kosong: List<i32> = List::baru();
+    println!("  List kosong: {:?}, len: {}", kosong, kosong.len());
     let list = List::Kosong
         .prepend(3)
         .prepend(2)

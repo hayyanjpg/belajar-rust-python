@@ -278,6 +278,8 @@ fn main() {
     println!("Sebelum: IPK = {:.2}", mhs2.ipk);
     mhs2.set_ipk(3.95).unwrap();
     println!("Sesudah: IPK = {:.2}", mhs2.ipk);
+    mhs2.nonaktifkan();
+    println!("Status setelah nonaktifkan: {}", if mhs2.aktif { "Aktif" } else { "Non-aktif" });
 
     // 4. Consuming method (move)
     println!("\n--- CONSUMING METHOD (MOVE) ---");
@@ -335,6 +337,7 @@ fn main() {
     println!("\n--- DEBUG DERIVE VS MANUAL ---");
     let d1 = DenganDerive { x: 1, y: "hello".to_string() };
     let d2 = TanpaDerive { x: 2, y: "world".to_string() };
+    println!("Field d1: x={}, y={}", d1.x, d1.y);
     println!("Derive: {:?}", d1);
     println!("Manual: {:?}", d2);
 
