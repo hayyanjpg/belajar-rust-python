@@ -95,10 +95,7 @@ impl Mahasiswa {
     }
 
     // Method dengan generic parameter
-    fn bandingkan_ipk<T: PartialOrd>(&self, other: &T) -> bool
-    where
-        T: HasIpk,
-    {
+    fn bandingkan_ipk<T: HasIpk>(&self, other: &T) -> bool {
         self.ipk > other.ipk()
     }
 }
@@ -145,7 +142,7 @@ impl WarnaRGB {
 
     fn grayscale(&self) -> u8 {
         // Formula luminance
-        ((0.299 * self.0 as f32 + 0.587 * self.1 as f32 + 0.114 * self.2 as f32) as u8)
+        (0.299 * self.0 as f32 + 0.587 * self.1 as f32 + 0.114 * self.2 as f32) as u8
     }
 }
 
