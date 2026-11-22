@@ -2,6 +2,20 @@
 /.idea/
 .env
 *.log
+
+# Python
 __pycache__/
 *.pyc
 .venv/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+*.egg-info/
+
+# Hasil latihan yang dibuat saat menjalankan script
+data_latihan/
+contoh_tulis.txt
+test_cm.txt
+
+# Rust
+target/
