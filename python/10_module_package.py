@@ -18,12 +18,16 @@ def halo(nama):
 PI = 3.14159
 
 
-def hitung_luas_lingkar(jari_jari):
+def hitung_luas_lingkaran(jari_jari):
+    return PI * jari_jari ** 2
+
+
+def hitung_keliling_lingkaran(jari_jari):
     return 2 * PI * jari_jari
 
 
 print(halo("Dunia"))
-print(f"Lingkaran r=5: {hitung_luas_lingkar(5):.2f}")
+print(f"Lingkaran r=5: luas={hitung_luas_lingkaran(5):.2f}, keliling={hitung_keliling_lingkaran(5):.2f}")
 
 # ============================================
 # 2. Import Statements
@@ -42,8 +46,8 @@ from datetime import datetime
 now = datetime.now()
 print(f"Waktu sekarang: {now.strftime('%Y-%m-%d %H:%M:%S')}")
 
-# import with alias
-import pandas as pd  # contoh library populer
+# import with alias (contoh; pandas perlu di-install dulu: pip install pandas)
+# import pandas as pd
 
 # ============================================
 # 3. Mengelola Package
@@ -65,7 +69,7 @@ print("\n=== 3. Package ===")
 print("\n=== 4. __init__.py ===")
 
 # __init__.py bisa berisi inisialisasi package, mengimpor modul, atau mendefinisikan __all__
-# __all__ mengontrol apa yang diekspor saat using "from package import *"
+# __all__ mengontrol apa yang diekspor saat menggunakan "from package import *"
 
 # Contoh:
 # __all__ = ['tambah', 'kurang']
