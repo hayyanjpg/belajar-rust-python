@@ -7,26 +7,26 @@ Folder latihan dan catatan belajar bahasa pemrograman Rust.
 ### Tahap 1 — Fondasi
 - [ ] Instalasi toolchain (`rustup`, `cargo`, `rustc`)
 - [ ] Struktur proyek dan perintah dasar Cargo (`new`, `build`, `run`, `check`, `fmt`, `clippy`)
-- [ ] Sintaks dasar: variabel, mutabilitas, konstanta, tipe data skalar & kompilasi
-- [ ] Tipe data majemuk: tuple, array, slice
+- [x] Sintaks dasar: variabel, mutabilitas, konstanta, tipe data skalar & kompilasi
+- [x] Tipe data majemuk: tuple, array, slice
 - [ ] Percabangan (`if`, `else`) dan perulangan (`loop`, `while`, `for`)
-- [ ] Fungsi, parameter, nilai balik, dan ekspresi
+- [x] Fungsi, parameter, nilai balik, dan ekspresi
 
 ### Tahap 2 — Konsep Inti
-- [ ] Ownership (kepemilikan) dan aturan borrow checker
-- [ ] Borrowing: immutable (`&T`) dan mutable (`&mut T`)
+- [x] Ownership (kepemilikan) dan aturan borrow checker
+- [x] Borrowing: immutable (`&T`) dan mutable (`&mut T`)
 - [ ] Lifetimes dasar
-- [ ] Struct, method, dan `impl`
-- [ ] Enum dan pattern matching (`match`, `if let`)
+- [x] Struct, method, dan `impl`
+- [x] Enum dan pattern matching (`match`, `if let`)
 - [ ] Module system, `use`, dan visibilitas (`pub`)
-- [ ] `Option<T>` dan `Result<T>` untuk penanganan error
-- [ ] Error handling: `?` operator, custom error, `panic!`
+- [x] `Option<T>` dan `Result<T>` untuk penanganan error
+- [x] Error handling: `?` operator, custom error, `panic!`
 
 ### Tahap 3 — Koleksi & Iterasi
-- [ ] `Vec<T>`, `String`, `HashMap`, `HashSet`
-- [ ] Iterator, closure, dan adaptor (`map`, `filter`, `collect`, `fold`)
-- [ ] Generic types, trait, dan trait bound
-- [ ] Deriving trait (`Debug`, `Clone`, `PartialEq`, dll.)
+- [x] `Vec<T>`, `String`, `HashMap`, `HashSet`
+- [x] Iterator, closure, dan adaptor (`map`, `filter`, `collect`, `fold`)
+- [x] Generic types, trait, dan trait bound
+- [x] Deriving trait (`Debug`, `Clone`, `PartialEq`, dll.)
 
 ### Tahap 4 — Konkurensi & OOP Fungsional
 - [ ] Smart pointer: `Box<T>`, `Rc<T>`, `RefCell<T>`, `Arc<T>`
