@@ -5,7 +5,7 @@
 use std::fmt;
 use std::error::Error;
 use std::fs::File;
-use std::io::{self, Read, Write};
+use std::io::{self, Read};
 use std::num::ParseIntError;
 
 // ============================================
@@ -80,7 +80,7 @@ fn demo_result() {
     println!("  ok.map(|x| x*2): {:?}", ok.map(|x| x * 2));
     println!("  err.map(|x| x*2): {:?}", err.map(|x| x * 2));
     println!("  ok.and_then: {:?}", ok.and_then(|x| if x > 10 { Ok(x / 2) } else { Err("kecil") }));
-    println!("  err.or_else: {:?}", err.or_else(|_| Ok(999)));
+    println!("  err.or_else: {:?}", err.or_else(|_| Ok::<i32, &str>(999)));
 
     // Parse int
     match parse_int("123") {
@@ -248,18 +248,18 @@ fn demo_combinators() {
     println!("  err.map_err(|e| e.len()): {:?}", err.map_err(|e| e.len()));
 
     // and_then: chain operations that return Result
-    fn safe_div(a: i32, b: i32) -> Result<i32, &str> {
+    fn safe_div(a: i32, b: i32) -> Result<i32, &'static str> {
         if b == 0 { Err("div by zero") } else { Ok(a / b) }
     }
     println!("  ok.and_then(|x| safe_div(x,2)): {:?}", ok.and_then(|x| safe_div(x, 2)));
     println!("  ok.and_then(|x| safe_div(x,0)): {:?}", ok.and_then(|x| safe_div(x, 0)));
 
     // or_else: recovery from error
-    println!("  err.or_else(|_| Ok(999)): {:?}", err.or_else(|_| Ok(999)));
+    println!("  err.or_else(|_| Ok(999)): {:?}", err.or_else(|_| Ok::<i32, &str>(999)));
 
     // unwrap_or / unwrap_or_else
     println!("  err.unwrap_or(0): {}", err.unwrap_or(0));
-    println!("  err.unwrap_or_else(|e| e.len()): {}", err.unwrap_or_else(|e| e.len()));
+    println!("  err.unwrap_or_else(|e| e.len()): {}", err.unwrap_or_else(|e| e.len() as i32));
 }
 
 // ============================================
@@ -296,13 +296,14 @@ fn demo_try_from() {
     println!("\n--- TRY FROM / TRY INTO ---");
 
     let besar: i64 = 1000;
-    let kecil: i8 = match kecil.try_from(besar) {
+    let kecil: i8 = match i8::try_from(besar) {
         Ok(v) => v,
         Err(e) => {
             println!("  Konversi i64->i8 gagal: {}", e);
             0
         }
     };
+    println!("  Hasil konversi (fallback 0): {}", kecil);
 
     let ok: i8 = 50;
     match i16::try_from(ok) {
