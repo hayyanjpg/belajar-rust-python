@@ -255,9 +255,9 @@ impl fmt::Debug for TanpaDerive {
 // MAIN DEMO
 // ============================================
 fn main() {
-    println!("=" .repeat(50));
+    println!("{}", "=".repeat(50));
     println!("DEMO STRUCT & METHOD IMPL RUST");
-    println!("=" .repeat(50));
+    println!("{}", "=".repeat(50));
 
     // 1. Struct dasar
     println!("\n--- STRUCT DASAR ---");
