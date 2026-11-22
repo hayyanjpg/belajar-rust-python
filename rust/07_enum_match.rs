@@ -2,8 +2,6 @@
 // Penjelasan: Enum = tipe data yang bisa memiliki beberapa varian.
 // match = ekspresi pattern matching yang exhaustive (harus cover semua kasus).
 
-use std::fmt;
-
 // ============================================
 // 1. ENUM DASAR
 // ============================================
@@ -44,7 +42,7 @@ enum List<T> {
 // ============================================
 // 2. PATTERN MATCHING DASAR
 // ============================================
-fn cek_status(status: StatusMahasiswa) -> &'static str {
+fn cek_status(status: &StatusMahasiswa) -> &'static str {
     match status {
         StatusMahasiswa::Aktif => "Sedang belajar",
         StatusMahasiswa::Cuti => "Sementara berhenti",
@@ -53,7 +51,7 @@ fn cek_status(status: StatusMahasiswa) -> &'static str {
     }
 }
 
-fn deskripsi_jurusan(jurusan: Jurusan) -> String {
+fn deskripsi_jurusan(jurusan: &Jurusan) -> String {
     match jurusan {
         Jurusan::Informatika => "IF - Fokus pemrograman & algoritma".to_string(),
         Jurusan::SistemInformasi => "SI - Fokus sistem & bisnis".to_string(),
@@ -236,6 +234,11 @@ fn demo_option_result() {
         Err(e) => println!("  Err: {}", e),
     }
 
+    match err {
+        Ok(v) => println!("  Ok: {}", v),
+        Err(e) => println!("  Err (seharusnya): {}", e),
+    }
+
     // Operator ? (hanya di fungsi yang return Result/Option)
     fn bagi(a: f64, b: f64) -> Result<f64, String> {
         if b == 0.0 {
@@ -307,20 +310,20 @@ fn exhaustive_match(status: StatusMahasiswa) {
 // MAIN DEMO
 // ============================================
 fn main() {
-    println!("=" .repeat(50));
+    println!("{}", "=".repeat(50));
     println!("DEMO ENUM & PATTERN MATCHING RUST");
-    println!("=" .repeat(50));
+    println!("{}", "=".repeat(50));
 
     // 1. Enum dasar
     println!("\n--- ENUM DASAR ---");
     let status = StatusMahasiswa::Aktif;
-    println!("Status: {:?} -> {}", status, cek_status(status));
+    println!("Status: {:?} -> {}", status, cek_status(&status));
 
     let jurusan = Jurusan::Informatika;
-    println!("Jurusan: {:?} -> {}", jurusan, deskripsi_jurusan(jurusan));
+    println!("Jurusan: {:?} -> {}", jurusan, deskripsi_jurusan(&jurusan));
 
     let jurusan2 = Jurusan::Lainnya("Bisnis Digital".to_string());
-    println!("Jurusan2: {:?} -> {}", jurusan2, deskripsi_jurusan(jurusan2));
+    println!("Jurusan2: {:?} -> {}", jurusan2, deskripsi_jurusan(&jurusan2));
 
     // 2. Enum dengan data
     println!("\n--- ENUM DENGAN DATA ---");
