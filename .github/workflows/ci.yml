@@ -1,0 +1,52 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  lint-and-test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+
+      - name: Install Python dependencies
+        run: |
+          cd python
+          pip install -r requirements.txt
+          pip install mypy black ruff pytest
+
+      - name: Run ruff check
+        run: cd python && ruff check .
+
+      - name: Run black check
+        run: cd python && black --check .
+
+      - name: Run mypy
+        run: cd python && mypy *.py
+
+      - name: Run pytest
+        run: cd python && pytest 11_testing.py -v
+
+      - name: Set up Rust
+        uses: actions-rs/toolchain@v1
+        with:
+          toolchain: stable
+          components: rustfmt, clippy
+
+      - name: Run cargo fmt check
+        run: cd rust/12_module_cargo && cargo fmt --check
+
+      - name: Run cargo clippy
+        run: cd rust/12_module_cargo && cargo clippy -- -D warnings
+
+      - name: Run cargo test
+        run: cd rust/12_module_cargo && cargo test
