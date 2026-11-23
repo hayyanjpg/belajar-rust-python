@@ -5,8 +5,8 @@ Tahap 5: Spesialisasi - Data Analysis
 Materi: numpy, pandas, data manipulation, exploratory data analysis
 """
 
-import numpy as np
-import pandas as pd  # type: ignore[import-untyped]
+import numpy as np  # type: ignore[import-not-found,import-untyped]
+import pandas as pd  # type: ignore[import-not-found,import-untyped]
 
 # ============================================================================
 # 1. NUMPY - Array numerik

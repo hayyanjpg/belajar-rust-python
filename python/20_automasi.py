@@ -7,8 +7,8 @@ Materi: requests, beautifulsoup4, REST API client, web scraping, file automation
 
 import os
 
-import requests  # type: ignore[import-untyped]
-from bs4 import BeautifulSoup
+import requests  # type: ignore[import-not-found,import-untyped]
+from bs4 import BeautifulSoup  # type: ignore[import-not-found,import-untyped]
 
 # ============================================================================
 # 1. REQUESTS - REST API Client

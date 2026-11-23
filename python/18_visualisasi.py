@@ -5,9 +5,9 @@ Tahap 5: Spesialisasi - Visualisasi Data
 Materi: matplotlib, seaborn, plot grafik, histogram, scatter, bar chart
 """
 
-import matplotlib.pyplot as plt
-import numpy as np
-import seaborn as sns  # type: ignore[import-untyped]
+import matplotlib.pyplot as plt  # type: ignore[import-not-found,import-untyped]
+import numpy as np  # type: ignore[import-not-found,import-untyped]
+import seaborn as sns  # type: ignore[import-not-found,import-untyped]
 
 # Set style seaborn
 sns.set_style("whitegrid")
