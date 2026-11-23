@@ -5,26 +5,26 @@ Tahap 5: Spesialisasi - Database
 Materi: sqlite3, SQLAlchemy ORM, CRUD, migrasi, koneksi database
 """
 
-import sqlite3
 import os
-from datetime import datetime
+import sqlite3
 
 # ============================================================================
 # 1. SQLITE3 - Database bawaan Python
 # ============================================================================
 
+
 def demo_sqlite3():
     print("=== DEMO SQLITE3 ===")
 
-    db_path = 'data_latihan/belajar.db'
-    os.makedirs('data_latihan', exist_ok=True)
+    db_path = "data_latihan/belajar.db"
+    os.makedirs("data_latihan", exist_ok=True)
 
     # Koneksi ke database
     conn = sqlite3.connect(db_path)
     cursor = conn.cursor()
 
     # Buat tabel
-    cursor.execute('''
+    cursor.execute("""
         CREATE TABLE IF NOT EXISTS pegawai (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
             nama TEXT NOT NULL,
@@ -32,50 +32,52 @@ def demo_sqlite3():
             gaji INTEGER,
             tanggal_gabung TEXT
         )
-    ''')
+    """)
     conn.commit()
     print("Tabel 'pegawai' dibuat")
 
     # Insert data
     pegawai_list = [
-        ('Budi', 'Programmer', 7000000, '2026-01-15'),
-        ('Siti', 'Desainer', 6500000, '2026-02-20'),
-        ('Joko', 'Manajer', 12000000, '2025-08-10'),
-        ('Ani', 'HRD', 8000000, '2026-03-05'),
+        ("Budi", "Programmer", 7000000, "2026-01-15"),
+        ("Siti", "Desainer", 6500000, "2026-02-20"),
+        ("Joko", "Manajer", 12000000, "2025-08-10"),
+        ("Ani", "HRD", 8000000, "2026-03-05"),
     ]
     cursor.executemany(
-        'INSERT INTO pegawai (nama, jabatan, gaji, tanggal_gabung) VALUES (?, ?, ?, ?)',
-        pegawai_list
+        "INSERT INTO pegawai (nama, jabatan, gaji, tanggal_gabung) VALUES (?, ?, ?, ?)",
+        pegawai_list,
     )
     conn.commit()
     print(f"Dimasukkan {len(pegawai_list)} data pegawai")
 
     # Select semua data
-    cursor.execute('SELECT * FROM pegawai')
+    cursor.execute("SELECT * FROM pegawai")
     rows = cursor.fetchall()
     print("\nSemua pegawai:")
     for row in rows:
-        print(f"  ID: {row[0]}, Nama: {row[1]}, Jabatan: {row[2]}, Gaji: {row[3]}, Gabung: {row[4]}")
+        print(
+            f"  ID: {row[0]}, Nama: {row[1]}, Jabatan: {row[2]}, Gaji: {row[3]}, Gabung: {row[4]}"
+        )
 
     # Select dengan WHERE
-    cursor.execute('SELECT nama, gaji FROM pegawai WHERE gaji > 7000000')
+    cursor.execute("SELECT nama, gaji FROM pegawai WHERE gaji > 7000000")
     high_salary = cursor.fetchall()
     print("\nPegawai dengan gaji > 7.000.000:")
     for row in high_salary:
         print(f"  {row[0]}: {row[1]}")
 
     # Update data
-    cursor.execute('UPDATE pegawai SET gaji = 7500000 WHERE nama = ?', ('Budi',))
+    cursor.execute("UPDATE pegawai SET gaji = 7500000 WHERE nama = ?", ("Budi",))
     conn.commit()
     print("\nGaji Budi diupdate ke 7.500.000")
 
     # Delete data
-    cursor.execute('DELETE FROM pegawai WHERE nama = ?', ('Ani',))
+    cursor.execute("DELETE FROM pegawai WHERE nama = ?", ("Ani",))
     conn.commit()
     print("Data Ani dihapus")
 
     # Tampilkan setelah update/delete
-    cursor.execute('SELECT * FROM pegawai')
+    cursor.execute("SELECT * FROM pegawai")
     rows = cursor.fetchall()
     print("\nPegawai setelah update dan delete:")
     for row in rows:
@@ -95,6 +97,7 @@ def latihan_sqlite3():
 # ============================================================================
 # 2. SQLALCHEMY - ORM (Object Relational Mapper)
 # ============================================================================
+
 
 def demo_sqlalchemy():
     print("\n=== DEMO SQLALCHEMY ===")
@@ -159,7 +162,7 @@ def latihan_sqlalchemy():
     print("Lakukan operasi CRUD: create, read, update, delete")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo_sqlite3()
     latihan_sqlite3()
     demo_sqlalchemy()

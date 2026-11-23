@@ -9,13 +9,14 @@ Materi: flask, fastapi, routing, REST API, template, request/response
 # FLASK - Micro web framework
 # ============================================================================
 
+
 def demo_flask():
     """
     Contoh struktur aplikasi Flask.
     Install: pip install flask
     Jalankan: flask run (setelah export FLASK_APP=app_flask.py)
     """
-    flask_code = '''
+    flask_code = """
 from flask import Flask, render_template, request, jsonify
 
 app = Flask(__name__)
@@ -59,7 +60,7 @@ def create_user():
 
 if __name__ == '__main__':
     app.run(debug=True)
-'''
+"""
     print("=== KONSTRUKSI APLIKASI FLASK ===")
     print(flask_code)
     print("Simpan kode di atas sebagai app_flask.py, lalu jalankan dengan 'flask run'")
@@ -69,13 +70,14 @@ if __name__ == '__main__':
 # FASTAPI - Modern, fast web framework
 # ============================================================================
 
+
 def demo_fastapi():
     """
     Contoh struktur aplikasi FastAPI.
     Install: pip install fastapi uvicorn
     Jalankan: uvicorn app_fastapi:app --reload
     """
-    fastapi_code = '''
+    fastapi_code = """
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
@@ -143,10 +145,12 @@ def delete_user(user_id: int):
             users_db.pop(i)
             return {"message": "User berhasil dihapus"}
     raise HTTPException(status_code=404, detail="User tidak ditemukan")
-'''
+"""
     print("\n=== KONSTRUKSI APLIKASI FASTAPI ===")
     print(fastapi_code)
-    print("Simpan kode di atas sebagai app_fastapi.py, lalu jalankan dengan 'uvicorn app_fastapi:app --reload'")
+    print(
+        "Simpan kode di atas sebagai app_fastapi.py, lalu jalankan dengan 'uvicorn app_fastapi:app --reload'"
+    )
     print("Dokumentasi otomatis tersedia di http://localhost:8000/docs")
 
 
@@ -162,7 +166,7 @@ def latihan_fastapi():
     print("Setiap produk memiliki: id, nama, harga, stok")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     demo_flask()
     demo_fastapi()
     latihan_flask()

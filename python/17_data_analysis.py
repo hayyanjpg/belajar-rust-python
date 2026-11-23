@@ -6,11 +6,12 @@ Materi: numpy, pandas, data manipulation, exploratory data analysis
 """
 
 import numpy as np
-import pandas as pd
+import pandas as pd  # type: ignore[import-untyped]
 
 # ============================================================================
 # 1. NUMPY - Array numerik
 # ============================================================================
+
 
 def demo_numpy():
     print("=== DEMO NUMPY ===")
@@ -63,18 +64,19 @@ def demo_numpy():
 # 2. PANDAS - Data manipulation
 # ============================================================================
 
+
 def demo_pandas():
     print("\n=== DEMO PANDAS ===")
 
     # Membuat Series dan DataFrame
-    series = pd.Series([10, 20, 30, 40, 50], index=['a', 'b', 'c', 'd', 'e'])
+    series = pd.Series([10, 20, 30, 40, 50], index=["a", "b", "c", "d", "e"])
     print(f"Series:\n{series}")
 
     data_dict = {
-        'nama': ['Budi', 'Siti', 'Joko', 'Ani'],
-        'umur': [25, 30, 35, 28],
-        'kota': ['Jakarta', 'Bandung', 'Surabaya', 'Yogyakarta'],
-        'gaji': [7000000, 9000000, 12000000, 8000000]
+        "nama": ["Budi", "Siti", "Joko", "Ani"],
+        "umur": [25, 30, 35, 28],
+        "kota": ["Jakarta", "Bandung", "Surabaya", "Yogyakarta"],
+        "gaji": [7000000, 9000000, 12000000, 8000000],
     }
     df = pd.DataFrame(data_dict)
     print(f"\nDataFrame:\n{df}")
@@ -92,30 +94,32 @@ def demo_pandas():
     print(f"\nFilter kota Jakarta:\n{df[df['kota'] == 'Jakarta']}")
 
     # Manipulasi data
-    df['tahun_lahir'] = 2026 - df['umur']
+    df["tahun_lahir"] = 2026 - df["umur"]
     print(f"\nSetelah menambah kolom tahun_lahir:\n{df}")
 
-    df['gaji_juta'] = df['gaji'] / 1000000
+    df["gaji_juta"] = df["gaji"] / 1000000
     print(f"\nSetelah menambah kolom gaji_juta:\n{df}")
 
     # GroupBy
     print(f"\nRata-rata gaji per kota:\n{df.groupby('kota')['gaji'].mean()}")
 
     # Sorting
-    print(f"\nUrutkan berdasarkan gaji (desc):\n{df.sort_values('gaji', ascending=False)}")
+    print(
+        f"\nUrutkan berdasarkan gaji (desc):\n{df.sort_values('gaji', ascending=False)}"
+    )
 
     # Missing data
     df_with_nan = df.copy()
-    df_with_nan.loc[1, 'gaji'] = np.nan
+    df_with_nan.loc[1, "gaji"] = np.nan
     print(f"\nData dengan NaN:\n{df_with_nan}")
     print(f"\nDrop NaN:\n{df_with_nan.dropna()}")
     print(f"\nFill NaN dengan mean:\n{df_with_nan.fillna(df_with_nan['gaji'].mean())}")
 
     # Export/Import CSV
-    df.to_csv('data_latihan/pegawai.csv', index=False)
+    df.to_csv("data_latihan/pegawai.csv", index=False)
     print("\nData diekspor ke data_latihan/pegawai.csv")
 
-    df_imported = pd.read_csv('data_latihan/pegawai.csv')
+    df_imported = pd.read_csv("data_latihan/pegawai.csv")
     print(f"Data diimpor:\n{df_imported}")
 
 
@@ -131,20 +135,23 @@ def latihan_numpy():
 
 def latihan_pandas():
     print("\n=== LATIHAN PANDAS ===")
-    data = pd.DataFrame({
-        'produk': ['Laptop', 'Mouse', 'Keyboard', 'Monitor'],
-        'harga': [10000000, 200000, 500000, 3000000],
-        'stok': [10, 50, 30, 15]
-    })
+    data = pd.DataFrame(
+        {
+            "produk": ["Laptop", "Mouse", "Keyboard", "Monitor"],
+            "harga": [10000000, 200000, 500000, 3000000],
+            "stok": [10, 50, 30, 15],
+        }
+    )
     print(f"DataFrame produk:\n{data}")
-    data['total_nilai'] = data['harga'] * data['stok']
+    data["total_nilai"] = data["harga"] * data["stok"]
     print(f"\nSetelah kolom total_nilai:\n{data}")
     print(f"\nProduk dengan stok < 20:\n{data[data['stok'] < 20]}")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     import os
-    os.makedirs('data_latihan', exist_ok=True)
+
+    os.makedirs("data_latihan", exist_ok=True)
 
     demo_numpy()
     demo_pandas()

@@ -6,12 +6,12 @@ Materi: asyncio, aiohttp, mypy, black, ruff
 """
 
 import asyncio
-import aiohttp
 import time
 
 # ============================================================================
 # 1. ASYNCIO - Pemrograman Asinkron
 # ============================================================================
+
 
 async def fetch_data(delay, id):
     """Simulasi pengambilan data dengan delay"""
@@ -58,6 +58,7 @@ async def demo_asyncio_create_task():
 # 2. AIOHTTP - HTTP Client Asinkron
 # ============================================================================
 
+
 async def demo_aiohttp():
     print("\n=== DEMO AIOHTTP ===")
     print("Catatan: Install dengan 'pip install aiohttp'")
@@ -90,6 +91,7 @@ asyncio.run(main())
 # ============================================================================
 # 3. TOOLING: MYPY, BLACK, RUFF
 # ============================================================================
+
 
 def demo_tooling():
     print("\n=== DEMO TOOLING (MYPY, BLACK, RUFF) ===")
@@ -130,7 +132,7 @@ def latihan_tooling():
     print("3. Jalankan 'ruff check' untuk mencari potensi bug")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     asyncio.run(demo_asyncio_gather())
     asyncio.run(demo_asyncio_create_task())
     asyncio.run(demo_aiohttp())

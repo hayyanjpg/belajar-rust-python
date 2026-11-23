@@ -1,5 +1,6 @@
 # Materi 04: Fungsi Dasar
 
+
 def sapa(nama):
     print(f"Halo, {nama}!")
 

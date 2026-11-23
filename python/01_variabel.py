@@ -2,10 +2,10 @@
 # Penjelasan: Variabel adalah wadah untuk menyimpan data. Python bersifat dynamic typing,
 # artinya tipe data ditentukan otomatis saat runtime berdasarkan nilai yang ditugaskan.
 
-nama = "Hayyan"          # tipe str (string) - teks
-umur = 20                # tipe int (integer) - bilangan bulat
-tinggi = 170.5           # tipe float - bilangan desimal
-is_active = True         # tipe bool (boolean) - True/False
+nama = "Hayyan"  # tipe str (string) - teks
+umur = 20  # tipe int (integer) - bilangan bulat
+tinggi = 170.5  # tipe float - bilangan desimal
+is_active = True  # tipe bool (boolean) - True/False
 
 print("Nama   :", nama)
 print("Umur   :", umur)
@@ -28,8 +28,8 @@ PI = 3.14159
 print("Konstanta PI =", PI)
 
 # Casting / konversi tipe data
-umur_str = str(umur)       # int -> str
-umur_float = float(umur)   # int -> float
+umur_str = str(umur)  # int -> str
+umur_float = float(umur)  # int -> float
 print("Umur -> str :", umur_str, type(umur_str).__name__)
 print("Umur -> float:", umur_float, type(umur_float).__name__)
 
@@ -54,7 +54,7 @@ print(f"  Luas = {luas}, Keliling = {keliling}")
 
 # Latihan 3: Konversi suhu Celsius ke Fahrenheit & Kelvin
 celsius = 37.0
-fahrenheit = celsius * 9/5 + 32
+fahrenheit = celsius * 9 / 5 + 32
 kelvin = celsius + 273.15
 print(f"\nLatihan 3 - Suhu {celsius}°C = {fahrenheit:.1f}°F = {kelvin:.2f}K")
 

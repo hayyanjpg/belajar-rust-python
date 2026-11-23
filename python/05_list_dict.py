@@ -1,4 +1,5 @@
 # Materi 05: List dan Dictionary
+from typing import Any
 
 print("=== LIST ===")
 buah = ["apel", "mangga", "jeruk", "pisang"]
@@ -50,7 +51,7 @@ for kunci, nilai in mahasiswa.items():
 
 print("Dict comprehension:", {n: n * n for n in range(1, 6)})
 
-daftar_mahasiswa = [
+daftar_mahasiswa: list[dict[str, Any]] = [
     {"nama": "Hayyan", "ipk": 3.9},
     {"nama": "Rina", "ipk": 3.5},
     {"nama": "Budi", "ipk": 3.1},

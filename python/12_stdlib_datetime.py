@@ -1,9 +1,9 @@
 # Materi 12: Standard Library - datetime, time, calendar
 # Python standard library menyediakan modul untuk manipulasi waktu dan tanggal.
 
-from datetime import datetime, date, time, timedelta, timezone
-import time as time_module
 import calendar
+import time as time_module
+from datetime import UTC, date, datetime, time, timedelta, timezone
 
 # ============================================
 # 1. datetime - Tanggal dan Waktu
@@ -15,11 +15,11 @@ now = datetime.now()
 print(f"Sekarang: {now}")
 
 # datetime.today() - tanggal hari ini (tanpa timezone)
-today = datetime.today()
+today = datetime.today()  # noqa: DTZ002 - contoh waktu lokal tanpa timezone
 print(f"Hari ini: {today}")
 
-# datetime.utcnow() - waktu UTC
-utc_now = datetime.utcnow()
+# datetime.now(UTC) - waktu UTC (utcnow() sudah deprecated)
+utc_now = datetime.now(UTC)
 print(f"UTC: {utc_now}")
 
 # datetime.fromtimestamp() - dari timestamp Unix
@@ -101,7 +101,7 @@ print(f"Total detik: {total_detik}")
 print("\n=== 5. timezone ===")
 
 # UTC
-utc = timezone.utc
+utc = UTC
 dt_utc = datetime.now(utc)
 print(f"UTC aware: {dt_utc}")
 
@@ -120,8 +120,8 @@ print(f"UTC ke WIB: {dt_wib_converted}")
 print("\n=== 6. time module ===")
 
 # Timestamp Unix (detik sejak epoch)
-ts = time_module.time()
-print(f"Timestamp: {ts}")
+ts_sekarang = time_module.time()
+print(f"Timestamp: {ts_sekarang}")
 
 # Sleep
 print("Sleep 0.5 detik...")
@@ -172,24 +172,24 @@ print("\n=== 8. zoneinfo (Python 3.9+) ===")
 
 try:
     from zoneinfo import ZoneInfo
-    
+
     # Zona waktu IANA
     jakarta = ZoneInfo("Asia/Jakarta")
     dt_jakarta = datetime.now(jakarta)
     print(f"Jakarta: {dt_jakarta}")
-    
+
     tokyo = ZoneInfo("Asia/Tokyo")
     dt_tokyo = datetime.now(tokyo)
     print(f"Tokyo: {dt_tokyo}")
-    
+
     new_york = ZoneInfo("America/New_York")
     dt_ny = datetime.now(new_york)
     print(f"New York: {dt_ny}")
-    
+
     # Konversi
     dt_tokyo_converted = dt_jakarta.astimezone(tokyo)
     print(f"Jakarta ke Tokyo: {dt_tokyo_converted}")
-    
+
 except ImportError:
     print("zoneinfo tidak tersedia (Python < 3.9)")
 
@@ -197,6 +197,7 @@ except ImportError:
 # LATIHAN TAMBAHAN
 # ============================================
 print("\n=== LATIHAN TAMBAHAN ===")
+
 
 # Latihan 1: Hitung umur dari tanggal lahir
 def hitung_umur(tanggal_lahir: date) -> int:
@@ -206,19 +207,33 @@ def hitung_umur(tanggal_lahir: date) -> int:
         umur -= 1
     return umur
 
+
 lahir = date(2000, 5, 15)
 print(f"Umur (lahir 15 Mei 2000): {hitung_umur(lahir)} tahun")
 
 # Latihan 2: Format tanggal Indonesia
 bulan_id = [
-    "Januari", "Februari", "Maret", "April", "Mei", "Juni",
-    "Juli", "Agustus", "September", "Oktober", "November", "Desember"
+    "Januari",
+    "Februari",
+    "Maret",
+    "April",
+    "Mei",
+    "Juni",
+    "Juli",
+    "Agustus",
+    "September",
+    "Oktober",
+    "November",
+    "Desember",
 ]
+
 
 def format_indonesia(dt: datetime) -> str:
     return f"{dt.day} {bulan_id[dt.month - 1]} {dt.year}"
 
+
 print(f"Format ID: {format_indonesia(datetime.now())}")
+
 
 # Latihan 3: Hitung hari kerja
 def hitung_hari_kerja(mulai: date, selesai: date) -> int:
@@ -230,12 +245,14 @@ def hitung_hari_kerja(mulai: date, selesai: date) -> int:
         current += timedelta(days=1)
     return hari_kerja
 
+
 mulai = date(2024, 12, 1)
 selesai = date(2024, 12, 31)
 print(f"Hari kerja Desember 2024: {hitung_hari_kerja(mulai, selesai)}")
 
 # Latihan 4: Stopwatch sederhana
 import time as t
+
 
 def stopwatch():
     input("Tekan Enter untuk mulai...")
@@ -244,7 +261,9 @@ def stopwatch():
     end = t.perf_counter()
     print(f"Waktu: {end - start:.3f} detik")
 
+
 # stopwatch()  # Uncomment untuk mencoba
+
 
 # Latihan 5: Countdown timer
 def countdown(detik: int):
@@ -254,5 +273,6 @@ def countdown(detik: int):
         t.sleep(1)
         detik -= 1
     print("\rWaktu habis!")
+
 
 # countdown(10)  # Uncomment untuk mencoba 10 detik

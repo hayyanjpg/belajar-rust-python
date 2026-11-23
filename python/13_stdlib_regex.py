@@ -82,7 +82,9 @@ print("\n=== 4. Grouping ===")
 pola_tanggal = r"(?P<tanggal>\d{2})/(?P<bulan>\d{2})/(?P<tahun>\d{4})"
 teks_tgl = "Lahir: 15/05/2000, Nikah: 20/06/2025"
 for m in re.finditer(pola_tanggal, teks_tgl):
-    print(f"  Tanggal: {m.group('tanggal')}, Bulan: {m.group('bulan')}, Tahun: {m.group('tahun')}")
+    print(
+        f"  Tanggal: {m.group('tanggal')}, Bulan: {m.group('bulan')}, Tahun: {m.group('tahun')}"
+    )
     print(f"  Groups: {m.groups()}")
     print(f"  Groupdict: {m.groupdict()}")
 
@@ -101,13 +103,16 @@ pola = re.compile(r"python", re.IGNORECASE)
 print(f"Case insensitive: {pola.findall('Python PYTHON python PyThOn')}")
 
 # Verbose mode - pola yang readable
-pola_verbose = re.compile(r"""
+pola_verbose = re.compile(
+    r"""
     \d{3}   # 3 digit awal
     [- ]?   # pemisah opsional
     \d{4}   # 4 digit tengah
     [- ]?   # pemisah opsional
     \d{4}   # 4 digit akhir
-""", re.VERBOSE)
+""",
+    re.VERBOSE,
+)
 
 print(f"Verbose: {pola_verbose.findall('0812-3456-7890 0812 3456 7890')}")
 
@@ -155,9 +160,11 @@ emails_test = [
 ]
 
 for email in emails_test:
-    m = email_pattern.match(email)
-    if m:
-        print(f"  Valid: {email} -> local={m.group('local')}, domain={m.group('domain')}, tld={m.group('tld')}")
+    email_match = email_pattern.match(email)
+    if email_match:
+        print(
+            f"  Valid: {email} -> local={email_match.group('local')}, domain={email_match.group('domain')}, tld={email_match.group('tld')}"
+        )
     else:
         print(f"  Invalid: {email}")
 
@@ -179,17 +186,19 @@ print(f"Masked CC: {masked}")
 # Parsing log
 log = '127.0.0.1 - - [19/Nov/2026:10:30:45 +0700] "GET /api/user HTTP/1.1" 200 1234'
 log_pattern = re.compile(
-    r'(?P<ip>\S+) '
-    r'(?P<ident>\S+) '
-    r'(?P<user>\S+) '
-    r'\[(?P<time>[^\]]+)\] '
+    r"(?P<ip>\S+) "
+    r"(?P<ident>\S+) "
+    r"(?P<user>\S+) "
+    r"\[(?P<time>[^\]]+)\] "
     r'"(?P<request>[^"]+)" '
-    r'(?P<status>\d+) '
-    r'(?P<size>\d+)'
+    r"(?P<status>\d+) "
+    r"(?P<size>\d+)"
 )
-m = log_pattern.match(log)
-if m:
-    print(f"Log parsed: IP={m.group('ip')}, Status={m.group('status')}, Request={m.group('request')}")
+log_match = log_pattern.match(log)
+if log_match:
+    print(
+        f"Log parsed: IP={log_match.group('ip')}, Status={log_match.group('status')}, Request={log_match.group('request')}"
+    )
 
 # ============================================
 # 8. Compile untuk Performa
@@ -210,6 +219,7 @@ print(f"Phones: {PHONE_REGEX.findall(data)}")
 # ============================================
 print("\n=== LATIHAN TAMBAHAN ===")
 
+
 # Latihan 1: Validasi password
 # Min 8 char, 1 uppercase, 1 lowercase, 1 digit, 1 simbol
 def validasi_password(pwd: str) -> bool:
@@ -221,25 +231,25 @@ def validasi_password(pwd: str) -> bool:
         return False
     if not re.search(r"\d", pwd):
         return False
-    if not re.search(r"[!@#$%^&*]", pwd):
-        return False
-    return True
+    return bool(re.search(r"[!@#$%^&*]", pwd))
+
 
 passwords = ["Pass123!", "weak", "Pass123", "PASS123!", "pass123!"]
 for p in passwords:
     print(f"  {p}: {'Valid' if validasi_password(p) else 'Invalid'}")
 
+
 # Latihan 2: Ekstrak URL
 def ekstrak_url(teks: str) -> list:
     url_pattern = re.compile(
-        r'https?://'
-        r'(?:[-\w.]|(?:%[\da-fA-F]{2}))+'
-        r'(?:/[-\w%!$&\'()*+,;=:@.]*)*'
+        r"https?://" r"(?:[-\w.]|(?:%[\da-fA-F]{2}))+" r"(?:/[-\w%!$&\'()*+,;=:@.]*)*"
     )
     return url_pattern.findall(teks)
 
+
 teks_url = "Kunjungi https://github.com dan http://example.com/path?query=1"
 print(f"URL: {ekstrak_url(teks_url)}")
+
 
 # Latihan 3: Validasi IP Address
 def validasi_ipv4(ip: str) -> bool:
@@ -251,9 +261,11 @@ def validasi_ipv4(ip: str) -> bool:
     )
     return bool(pattern.match(ip))
 
+
 ips = ["192.168.1.1", "255.255.255.255", "256.1.1.1", "10.0.0", "1.2.3.4.5"]
 for ip in ips:
     print(f"  {ip}: {'Valid' if validasi_ipv4(ip) else 'Invalid'}")
+
 
 # Latihan 4: Parsing CSV sederhana (tanpa csv module)
 def parse_csv_line(line: str) -> list:
@@ -267,17 +279,20 @@ def parse_csv_line(line: str) -> list:
         fields.append(field)
     return fields
 
+
 csv_lines = [
-    'nama,umur,kota',
+    "nama,umur,kota",
     '"Hayyan",25,"Jakarta"',
     '"Nashrulloh, Jr.",30,"Bandung, Jawa Barat"',
 ]
 for line in csv_lines:
     print(f"  {parse_csv_line(line)}")
 
+
 # Latihan 5: Replace dengan fungsi
 def capitalize_match(match):
     return match.group().upper()
+
 
 teks = "kata1 kata2 kata3"
 result = re.sub(r"\b\w+\b", capitalize_match, teks)

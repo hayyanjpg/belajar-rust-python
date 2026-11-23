@@ -18,7 +18,7 @@ try:
     angka = int("abc")  # ValueError: invalid literal for int() with base 10
 except ValueError as e:
     print(f"Terjadi kesalahan: {e}")
-except Exception as e:
+except Exception as e:  # noqa: BLE001 - contoh fallback error umum
     print(f"Kesalahan umum: {e}")
 else:
     # else dijalankan jika try tidak mengalami exception
@@ -34,16 +34,23 @@ print("=== 2. Jenis Exception ===")
 
 contoh_exceptions = [
     ("ZeroDivisionError", lambda: 10 / 0),
-    ("TypeError", lambda: 10 + "20"),
-    ("IndexError", lambda: [1, 2, 3][5]),
+    # Sengaja memicu TypeError untuk keperluan demo.
+    ("TypeError", lambda: 10 + "20"),  # type: ignore[operator]
+    (
+        "IndexError",
+        lambda: [1, 2, 3][5],  # noqa: PLE0643 - sengaja index di luar rentang
+    ),
     ("KeyError", lambda: {"nama": "Hayyan"}["umur"]),
-    ("FileNotFoundError", lambda: open("file_tidak_ada.txt")),
+    (
+        "FileNotFoundError",
+        lambda: open("file_tidak_ada.txt"),  # noqa: SIM115 - sengaja memicu error
+    ),
 ]
 
 for nama, fungsi in contoh_exceptions:
     try:
         fungsi()
-    except Exception as e:
+    except Exception as e:  # noqa: BLE001 - demo menangkap berbagai jenis error
         print(f"  {nama}: {type(e).__name__} - {e}")
 
 print()
@@ -156,7 +163,7 @@ try:
     with open(FILE_CONTOH, "w") as f:
         f.write("Ini adalah contoh penulisan file.\n")
     print("  File tertulis.")
-except IOError as e:
+except OSError as e:
     print(f"  Gagal menulis file: {e}")
 
 # Latihan 4: Baca file dengan exception handling

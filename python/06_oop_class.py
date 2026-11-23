@@ -2,6 +2,7 @@
 # Penjelasan: Python mendukung OOP penuh. Class = blueprint, Object = instance.
 # Pillars: Encapsulation, Inheritance, Polymorphism, Abstraction.
 
+
 # ============================================
 # 1. CLASS DASAR & __init__
 # ============================================
@@ -18,8 +19,10 @@ class Mahasiswa:
         self.nama = nama
         self.nim = nim
         self.jurusan = jurusan
-        self._ipk = 0.0          # Protected convention (single underscore)
-        self.__nilai_rahasia = 0  # Private convention (double underscore = name mangling)
+        self._ipk = 0.0  # Protected convention (single underscore)
+        self.__nilai_rahasia = (
+            0  # Private convention (double underscore = name mangling)
+        )
         Mahasiswa.jumlah_mahasiswa += 1
 
     # Method instance (butuh self)
@@ -66,7 +69,9 @@ class Mahasiswa:
         return f"Mahasiswa({self.nama}, {self.nim})"
 
     def __repr__(self) -> str:
-        return f"Mahasiswa(nama='{self.nama}', nim='{self.nim}', jurusan='{self.jurusan}')"
+        return (
+            f"Mahasiswa(nama='{self.nama}', nim='{self.nim}', jurusan='{self.jurusan}')"
+        )
 
     def __eq__(self, other) -> bool:
         if not isinstance(other, Mahasiswa):
@@ -88,7 +93,7 @@ class MahasiswaSiswa(Mahasiswa):
     def __init__(self, nama: str, nim: str, jurusan: str, angkatan: int):
         super().__init__(nama, nim, jurusan)  # panggil parent __init__
         self.angkatan = angkatan
-        self.organisasi = []
+        self.organisasi: list[str] = []
 
     def tambah_organisasi(self, org: str):
         self.organisasi.append(org)
@@ -113,13 +118,16 @@ class Dosen:
         self.matkul = matkul
 
     def perkenalkan(self) -> str:
-        return f"Halo, saya Dosen {self.nama} (NIDN: {self.nidn}), mengajar {self.matkul}"
+        return (
+            f"Halo, saya Dosen {self.nama} (NIDN: {self.nidn}), mengajar {self.matkul}"
+        )
 
 
 # ============================================
 # 3. ABSTRACTION & POLYMORPHISM
 # ============================================
 from abc import ABC, abstractmethod
+
 
 class Bentuk(ABC):
     """Abstract Base Class - tidak bisa di-instansiasi langsung"""
@@ -141,7 +149,7 @@ class Persegi(Bentuk):
         self.sisi = sisi
 
     def luas(self) -> float:
-        return self.sisi ** 2
+        return self.sisi**2
 
     def keliling(self) -> float:
         return 4 * self.sisi
@@ -153,10 +161,12 @@ class Lingkaran(Bentuk):
 
     def luas(self) -> float:
         import math
-        return math.pi * self.jari ** 2
+
+        return math.pi * self.jari**2
 
     def keliling(self) -> float:
         import math
+
         return 2 * math.pi * self.jari
 
 
@@ -197,15 +207,15 @@ if __name__ == "__main__":
     # 1. Basic class & object
     mhs1 = Mahasiswa("Hayyan", "2021001", "Informatika")
     mhs1.ipk = 3.85
-    print(f"\n1. Basic Class:")
+    print("\n1. Basic Class:")
     print(f"   {mhs1.perkenalkan()}")
     print(f"   IPK: {mhs1.ipk}")
     print(f"   str: {mhs1}")
-    print(f"   repr: {repr(mhs1)}")
+    print(f"   repr: {mhs1!r}")
 
     # 2. Class method & static method
     mhs2 = Mahasiswa.dari_string("Rina|2021002|Sistem Informasi")
-    print(f"\n2. Class Method Factory:")
+    print("\n2. Class Method Factory:")
     print(f"   {mhs2.perkenalkan()}")
     print(f"   Validasi NIM '2021001': {Mahasiswa.validasi_nim('2021001')}")
     print(f"   Total mahasiswa: {Mahasiswa.total_mahasiswa()}")
@@ -214,7 +224,7 @@ if __name__ == "__main__":
     mhs_siswa = MahasiswaSiswa("Budi", "2021003", "Teknik Informatika", 2021)
     mhs_siswa.tambah_organisasi("HIMATIF")
     mhs_siswa.tambah_organisasi("KMahasiswa")
-    print(f"\n3. Inheritance:")
+    print("\n3. Inheritance:")
     print(f"   {mhs_siswa.info_lengkap()}")
 
     # 4. Polymorphism: fungsi menerima interface yang sama
@@ -223,23 +233,23 @@ if __name__ == "__main__":
             print(f"   {orang.perkenalkan()}")
 
     dosen1 = Dosen("Dr. Siti", "12345678", "Struktur Data")
-    print(f"\n4. Polymorphism:")
+    print("\n4. Polymorphism:")
     sapu_semua([mhs1, mhs_siswa, dosen1])
 
     # 5. Abstract class
-    print(f"\n5. Abstract Class:")
+    print("\n5. Abstract Class:")
     bentuk_list = [Persegi(5), Lingkaran(3)]
     for b in bentuk_list:
         print(f"   {type(b).__name__}: {b.info()}")
 
     # 6. Composition
-    print(f"\n6. Composition:")
+    print("\n6. Composition:")
     alamat = Alamat("Jl. Merdeka No. 10", "Jakarta", "DKI Jakarta", "10110")
     mhs_lengkap = MahasiswaLengkap("Sari", "2021004", alamat)
     print(f"   {mhs_lengkap}")
 
     # 7. Magic methods: equality & comparison
-    print(f"\n7. Magic Methods (__eq__, __lt__):")
+    print("\n7. Magic Methods (__eq__, __lt__):")
     mhs_a = Mahasiswa("A", "001", "IT")
     mhs_a.ipk = 3.5
     mhs_b = Mahasiswa("B", "001", "IT")  # NIM sama
@@ -248,13 +258,14 @@ if __name__ == "__main__":
     print(f"   mhs_a < mhs_b (IPK): {mhs_a < mhs_b}")
 
     # 8. Private & name mangling demo
-    print(f"\n8. Private Attribute (Name Mangling):")
+    print("\n8. Private Attribute (Name Mangling):")
     mhs1.set_nilai_rahasia(95)
     print(f"   Via method: {mhs1.get_nilai_rahasia()}")
-    print(f"   Direct access mangled: {mhs1._Mahasiswa__nilai_rahasia}")
+    # Akses langsung ke atribut private sengaja dilakukan untuk demo name mangling.
+    print(f"   Direct access mangled: {mhs1._Mahasiswa__nilai_rahasia}")  # type: ignore[attr-defined]
 
     # 9. MRO (Method Resolution Order)
-    print(f"\n9. MRO MahasiswaSiswa:")
+    print("\n9. MRO MahasiswaSiswa:")
     for cls in MahasiswaSiswa.__mro__:
         print(f"   {cls}")
 

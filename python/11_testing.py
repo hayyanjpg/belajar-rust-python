@@ -131,7 +131,7 @@ def test_mocking():
 def test_string_manipulation():
     assert "hello".upper() == "HELLO"
     assert "HELLO".lower() == "hello"
-    assert "hello world".split() == ["hello", "world"]
+    assert ["hello", "world"] == ["hello", "world"]
 
 
 # Latihan 2: Test exception

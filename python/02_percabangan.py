@@ -69,6 +69,7 @@ else:
 # Latihan 2: Kalkulator sederhana dengan match-case (Python 3.10+)
 a, b, op = 15, 5, "*"
 print(f"\nLatihan 2 - Kalkulator: {a} {op} {b}")
+hasil: int | float | str
 match op:
     case "+":
         hasil = a + b
@@ -83,14 +84,14 @@ match op:
     case "%":
         hasil = a % b if b != 0 else "Error: div by zero"
     case "**":
-        hasil = a ** b
+        hasil = a**b
     case _:
         hasil = "Operator tidak dikenal"
 print(f"  Hasil = {hasil}")
 
 # Latihan 3: Kategorisasi BMI (Body Mass Index)
 berat, tinggi_m = 68, 1.70
-bmi = berat / (tinggi_m ** 2)
+bmi = berat / (tinggi_m**2)
 print(f"\nLatihan 3 - BMI: berat={berat}kg, tinggi={tinggi_m}m -> BMI={bmi:.1f}")
 if bmi < 18.5:
     kategori = "Kurus"
@@ -115,7 +116,9 @@ else:
 
 # Latihan 5: Ternary operator bersarang (nested ternary)
 skor = 88
-grade_detail = "A" if skor >= 90 else ("B" if skor >= 80 else ("C" if skor >= 70 else "D"))
+grade_detail = (
+    "A" if skor >= 90 else ("B" if skor >= 80 else ("C" if skor >= 70 else "D"))
+)
 print(f"\nLatihan 5 - Skor {skor} -> Grade detail: {grade_detail}")
 
 # Latihan 6: Pattern matching dengan guard (Python 3.10+)

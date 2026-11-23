@@ -2,21 +2,24 @@
 # Penjelasan: Dekorator = fungsi yang memodifikasi fungsi lain (higher-order function).
 # Generator = fungsi yang menghasilkan iterator lazy (menggunakan yield).
 
-import time
 import functools
-from typing import Callable, Any, Generator, Iterator
+import time
+from collections.abc import Callable, Generator
 from contextlib import contextmanager
+
 
 # ============================================
 # 1. DEKORATOR DASAR
 # ============================================
 def dekorator_sederhana(func: Callable) -> Callable:
     """Dekorator paling dasar: wrap fungsi tanpa argumen"""
+
     def wrapper(*args, **kwargs):
         print(f"[DEKORATOR] Sebelum memanggil {func.__name__}")
         result = func(*args, **kwargs)
         print(f"[DEKORATOR] Sesudah memanggil {func.__name__}")
         return result
+
     return wrapper
 
 
@@ -30,6 +33,7 @@ def halo(nama: str) -> str:
 # ============================================
 def repeat(times: int) -> Callable:
     """Decorator factory: menerima argumen, return decorator"""
+
     def decorator(func: Callable) -> Callable:
         @functools.wraps(func)  # Preserve metadata (__name__, __doc__, dll.)
         def wrapper(*args, **kwargs):
@@ -38,7 +42,9 @@ def repeat(times: int) -> Callable:
                 print(f"  [Repeat {i+1}/{times}]")
                 results.append(func(*args, **kwargs))
             return results
+
         return wrapper
+
     return decorator
 
 
@@ -105,7 +111,7 @@ def fibonacci_cached(n: int) -> int:
     return fibonacci_cached(n - 1) + fibonacci_cached(n - 2)
 
 
-@functools.lru_cache(maxsize=None)
+@functools.cache
 def faktorial_cached(n: int) -> int:
     if n <= 1:
         return 1
@@ -117,6 +123,7 @@ def faktorial_cached(n: int) -> int:
 # ============================================
 def timer(func: Callable) -> Callable:
     """Dekorator untuk mengukur waktu eksekusi"""
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         start = time.perf_counter()
@@ -124,17 +131,20 @@ def timer(func: Callable) -> Callable:
         end = time.perf_counter()
         print(f"[TIMER] {func.__name__} took {(end-start)*1000:.4f} ms")
         return result
+
     return wrapper
 
 
 def logger(func: Callable) -> Callable:
     """Dekorator untuk logging input/output"""
+
     @functools.wraps(func)
     def wrapper(*args, **kwargs):
         print(f"[LOG] Call: {func.__name__}(args={args}, kwargs={kwargs})")
         result = func(*args, **kwargs)
         print(f"[LOG] Return: {result}")
         return result
+
     return wrapper
 
 
@@ -195,7 +205,7 @@ def coroutine_contoh():
     """Demo coroutine dengan generator"""
     gen = generator_interaktif()
     print(next(gen))  # Start generator -> "Siap terima pesan"
-    print(gen.send("Halo"))   # Kirim "Halo" -> "Diterima: Halo"
+    print(gen.send("Halo"))  # Kirim "Halo" -> "Diterima: Halo"
     print(gen.send("Dunia"))  # Kirim "Dunia" -> "Diterima: Dunia"
     gen.close()  # Tutup generator
 
@@ -221,22 +231,23 @@ def main_generator() -> Generator[int, None, str]:
 # ============================================
 import itertools
 
+
 def pipeline_contoh():
     """Pipeline data dengan generator + itertools"""
     data = range(1, 21)
 
     # Pipeline: filter genap -> map kuadrat -> take 5
     gen = (x for x in data)
-    gen = filter(lambda x: x % 2 == 0, gen)      # Filter genap
-    gen = map(lambda x: x * x, gen)              # Map kuadrat
-    gen = itertools.islice(gen, 5)               # Ambil 5 pertama
+    gen = filter(lambda x: x % 2 == 0, gen)  # Filter genap
+    gen = (x * x for x in gen)  # Map kuadrat (generator expression)
+    gen = itertools.islice(gen, 5)  # Ambil 5 pertama
 
     print("Pipeline result:", list(gen))
 
     # itertools chaining
-    print("Chain:", list(itertools.chain([1,2], [3,4], [5])))
-    print("Cycle:", list(itertools.islice(itertools.cycle('ABC'), 7)))
-    print("Accumulate:", list(itertools.accumulate([1,2,3,4,5])))
+    print("Chain:", list(itertools.chain([1, 2], [3, 4], [5])))
+    print("Cycle:", list(itertools.islice(itertools.cycle("ABC"), 7)))
+    print("Accumulate:", list(itertools.accumulate([1, 2, 3, 4, 5])))
 
 
 # ============================================
@@ -246,12 +257,9 @@ def pipeline_contoh():
 def buka_file(nama: str, mode: str = "r"):
     """Context manager dengan generator (lebih sederhana dari class)"""
     print(f"[CM] Membuka {nama}")
-    f = open(nama, mode, encoding="utf-8")
-    try:
+    with open(nama, mode, encoding="utf-8") as f:
         yield f
-    finally:
-        print(f"[CM] Menutup {nama}")
-        f.close()
+    print(f"[CM] Menutup {nama}")
 
 
 @contextmanager
@@ -299,6 +307,7 @@ if __name__ == "__main__":
     # 5. LRU Cache
     print("\n--- @LRU_CACHE ---")
     import time
+
     start = time.perf_counter()
     print(f"fibonacci_cached(30) = {fibonacci_cached(30)}")
     print(f"Waktu pertama: {(time.perf_counter()-start)*1000:.2f} ms")
@@ -355,10 +364,10 @@ if __name__ == "__main__":
     from pathlib import Path
 
     tmp_file = Path(tempfile.gettempdir()) / "belajar_python_test_cm.txt"
-    with buka_file(tmp_file, "w") as f:
+    with buka_file(str(tmp_file), "w") as f:
         f.write("Test context manager\nBaris kedua")
 
-    with buka_file(tmp_file, "r") as f:
+    with buka_file(str(tmp_file), "r") as f:
         print(f"Isi: {f.read()}")
 
     tmp_file.unlink(missing_ok=True)  # bersihkan file sementara

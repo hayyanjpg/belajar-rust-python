@@ -2,11 +2,9 @@
 # Penjelasan: Python punya built-in module untuk I/O file.
 # Selalu gunakan 'with' statement (context manager) agar file auto-close.
 
-import json
 import csv
-import os
+import json
 from pathlib import Path
-from typing import List, Dict, Any
 
 # ============================================
 # KONFIGURASI PATH
@@ -21,10 +19,34 @@ FILE_BIN = DATA_DIR / "data.bin"
 
 # Sample data
 MAHASISWA_DATA = [
-    {"nim": "2021001", "nama": "Hayyan", "jurusan": "Informatika", "ipk": 3.85, "aktif": True},
-    {"nim": "2021002", "nama": "Rina", "jurusan": "Sistem Informasi", "ipk": 3.65, "aktif": True},
-    {"nim": "2021003", "nama": "Budi", "jurusan": "Teknik Informatika", "ipk": 3.40, "aktif": False},
-    {"nim": "2021004", "nama": "Sari", "jurusan": "Informatika", "ipk": 3.90, "aktif": True},
+    {
+        "nim": "2021001",
+        "nama": "Hayyan",
+        "jurusan": "Informatika",
+        "ipk": 3.85,
+        "aktif": True,
+    },
+    {
+        "nim": "2021002",
+        "nama": "Rina",
+        "jurusan": "Sistem Informasi",
+        "ipk": 3.65,
+        "aktif": True,
+    },
+    {
+        "nim": "2021003",
+        "nama": "Budi",
+        "jurusan": "Teknik Informatika",
+        "ipk": 3.40,
+        "aktif": False,
+    },
+    {
+        "nim": "2021004",
+        "nama": "Sari",
+        "jurusan": "Informatika",
+        "ipk": 3.90,
+        "aktif": True,
+    },
 ]
 
 
@@ -35,8 +57,10 @@ def tulis_text():
     """Menulis file teks dengan mode 'w' (write/overwrite)"""
     with open(FILE_TXT, "w", encoding="utf-8") as f:
         f.write("=== Catatan Mahasiswa ===\n")
-        for m in MAHASISWA_DATA:
-            f.write(f"{m['nim']} | {m['nama']} | {m['jurusan']} | IPK: {m['ipk']}\n")
+        f.writelines(
+            f"{m['nim']} | {m['nama']} | {m['jurusan']} | IPK: {m['ipk']}\n"
+            for m in MAHASISWA_DATA
+        )
     print(f"[TXT] Ditulis ke {FILE_TXT}")
 
 
@@ -72,7 +96,7 @@ def tulis_json():
     print(f"[JSON] Ditulis ke {FILE_JSON}")
 
 
-def baca_json() -> List[Dict]:
+def baca_json() -> list[dict]:
     """Deserialisasi JSON file -> Python object"""
     with open(FILE_JSON, "r", encoding="utf-8") as f:
         data = json.load(f)
@@ -107,11 +131,11 @@ def json_custom_encoder():
     data_dengan_waktu = {
         "mahasiswa": MAHASISWA_DATA[0],
         "waktu_buat": datetime.now(),
-        "tags": {"python", "json", "rust"}
+        "tags": {"python", "json", "rust"},
     }
     with open(DATA_DIR / "custom.json", "w", encoding="utf-8") as f:
         json.dump(data_dengan_waktu, f, cls=CustomEncoder, indent=2)
-    print(f"[JSON] Custom encoder written")
+    print("[JSON] Custom encoder written")
 
 
 # ============================================
@@ -127,7 +151,7 @@ def tulis_csv():
     print(f"[CSV] Ditulis ke {FILE_CSV}")
 
 
-def baca_csv() -> List[Dict]:
+def baca_csv() -> list[dict]:
     """Membaca CSV dengan csv.DictReader"""
     with open(FILE_CSV, "r", encoding="utf-8") as f:
         reader = csv.DictReader(f)
@@ -168,21 +192,24 @@ def baca_csv_dengan_tipe():
 # ============================================
 def tulis_biner():
     """Menulis file biner (bytes)"""
-    data_bytes = b"Ini data biner: \x00\x01\x02\x03\xFF\xFE"
+    data_bytes = b"Ini data biner: \x00\x01\x02\x03\xff\xfe"
     with open(FILE_BIN, "wb") as f:
         f.write(data_bytes)
 
     # Serialize struktur data dengan struct module
     import struct
+
     with open(DATA_DIR / "struct.bin", "wb") as f:
         for m in MAHASISWA_DATA:
             # Format: 10s (string 10 byte), 20s, 20s, f (float), ? (bool)
             nim_b = m["nim"].encode()[:10].ljust(10, b"\x00")
             nama_b = m["nama"].encode()[:20].ljust(20, b"\x00")
             jur_b = m["jurusan"].encode()[:20].ljust(20, b"\x00")
-            packed = struct.pack("10s20s20sf?", nim_b, nama_b, jur_b, m["ipk"], m["aktif"])
+            packed = struct.pack(
+                "10s20s20sf?", nim_b, nama_b, jur_b, m["ipk"], m["aktif"]
+            )
             f.write(packed)
-    print(f"[BIN] Binary file written")
+    print("[BIN] Binary file written")
 
 
 def baca_biner():
@@ -192,12 +219,15 @@ def baca_biner():
     print(f"[BIN] Raw bytes: {data}")
 
     import struct
+
     with open(DATA_DIR / "struct.bin", "rb") as f:
         record_size = struct.calcsize("10s20s20sf?")
         while chunk := f.read(record_size):
             nim_b, nama_b, jur_b, ipk, aktif = struct.unpack("10s20s20sf?", chunk)
-            print(f"  NIM: {nim_b.decode().strip()}, Nama: {nama_b.decode().strip()}, "
-                  f"Jurusan: {jur_b.decode().strip()}, IPK: {ipk}, Aktif: {aktif}")
+            print(
+                f"  NIM: {nim_b.decode().strip()}, Nama: {nama_b.decode().strip()}, "
+                f"Jurusan: {jur_b.decode().strip()}, IPK: {ipk}, Aktif: {aktif}"
+            )
 
 
 # ============================================
@@ -213,12 +243,12 @@ def demo_pathlib():
     print(f"[Pathlib] Is dir: {base.is_dir()}")
 
     # List files
-    print(f"[Pathlib] Files in dir:")
+    print("[Pathlib] Files in dir:")
     for f in base.iterdir():
         print(f"  {f.name} ({f.stat().st_size} bytes)")
 
     # Glob pattern
-    print(f"[Pathlib] *.json files:")
+    print("[Pathlib] *.json files:")
     for f in base.glob("*.json"):
         print(f"  {f}")
 
@@ -250,13 +280,16 @@ def baca_dengan_error_handling(filepath: Path):
 # ============================================
 class TimerContext:
     """Custom context manager untuk timing operasi file"""
+
     def __enter__(self):
         import time
+
         self.start = time.perf_counter()
         return self
 
     def __exit__(self, exc_type, exc_val, exc_tb):
         import time
+
         self.end = time.perf_counter()
         print(f"[Timer] Durasi: {(self.end - self.start)*1000:.2f} ms")
         return False  # Propagate exception jika ada
@@ -310,6 +343,7 @@ if __name__ == "__main__":
     print("\n--- CUSTOM CONTEXT MANAGER ---")
     with TimerContext():
         import time
+
         time.sleep(0.1)
         tulis_json()
 

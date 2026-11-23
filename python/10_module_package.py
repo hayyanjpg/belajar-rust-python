@@ -19,7 +19,7 @@ PI = 3.14159
 
 
 def hitung_luas_lingkaran(jari_jari):
-    return PI * jari_jari ** 2
+    return PI * jari_jari**2
 
 
 def hitung_keliling_lingkaran(jari_jari):
@@ -27,7 +27,9 @@ def hitung_keliling_lingkaran(jari_jari):
 
 
 print(halo("Dunia"))
-print(f"Lingkaran r=5: luas={hitung_luas_lingkaran(5):.2f}, keliling={hitung_keliling_lingkaran(5):.2f}")
+print(
+    f"Lingkaran r=5: luas={hitung_luas_lingkaran(5):.2f}, keliling={hitung_keliling_lingkaran(5):.2f}"
+)
 
 # ============================================
 # 2. Import Statements
@@ -139,7 +141,9 @@ print(f"Latihan 3 - Reverse 'python': {reverse_string('python')}")
 
 from math import ceil, floor, pow
 
-print(f"Latihan 4 - ceil(3.2)={ceil(3.2)}, floor(3.8)={floor(3.8)}, pow(2,3)={pow(2,3)}")
+print(
+    f"Latihan 4 - ceil(3.2)={ceil(3.2)}, floor(3.8)={floor(3.8)}, pow(2,3)={pow(2,3)}"
+)
 
 # Latihan 5: Cek __name__
 
@@ -189,8 +193,8 @@ print(f"Latihan 8 - Kecepatan: {kecepatan} m/s, G={GRAVITASI_BUMI}")
 # Latihan 9: Import multiple modules
 
 
-import sys
 import json
+import sys
 
 data = {"nama": "Hayyan", "umur": 20}
 json_str = json.dumps(data)

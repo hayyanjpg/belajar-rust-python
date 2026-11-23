@@ -40,7 +40,6 @@ for i in range(1, 4):
 print("Loop dengan else:")
 for i in range(3):
     print("  angka:", i)
-else:
-    print("  loop selesai tanpa break")
+print("  loop selesai tanpa break")
 
 print("Sum 1..10 =", sum(range(1, 11)))
