@@ -1,0 +1,12 @@
+[package]
+name = "cli_tool"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = { workspace = true, features = ["derive"] }
+lib_utils = { path = "../lib_utils" }
+
+[[bin]]
+name = "cli_tool"
+path = "src/main.rs"

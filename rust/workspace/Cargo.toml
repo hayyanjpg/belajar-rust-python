@@ -1,0 +1,19 @@
+[workspace]
+members = [
+    "crates/cli_tool",
+    "crates/lib_utils",
+]
+resolver = "2"
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+
+[workspace.dependencies]
+clap = { version = "4", features = ["derive"] }
+serde = { version = "1", features = ["derive"] }
+tokio = { version = "1", features = ["full"] }
+axum = "0.7"
+
+[profile.release]
+opt-level = 3
