@@ -14,6 +14,9 @@
 pub mod matematika;
 pub mod util;
 
+#[cfg(test)]
+mod tests_lanjutan;
+
 /// Versi crate diambil otomatis dari `Cargo.toml` saat compile.
 pub const VERSI: &str = env!("CARGO_PKG_VERSION");
 

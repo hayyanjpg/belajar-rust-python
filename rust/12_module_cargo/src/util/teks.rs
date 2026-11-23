@@ -6,9 +6,7 @@ pub fn kapitalisasi(teks: &str) -> String {
         .map(|kata| {
             let mut chars = kata.chars();
             match chars.next() {
-                Some(pertama) => {
-                    pertama.to_uppercase().collect::<String>() + chars.as_str()
-                }
+                Some(pertama) => pertama.to_uppercase().collect::<String>() + chars.as_str(),
                 None => String::new(),
             }
         })

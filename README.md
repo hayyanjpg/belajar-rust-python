@@ -32,7 +32,7 @@ belajar-rust-python/
 4. Standard library & tooling: venv, pip, pytest
 5. Spesialisasi: data analysis, web dev, automation, database
 
-## Progress Checklist (Updated: 2026-11-22)
+## Progress Checklist (Updated: 2026-11-24)
 
 ### Python - Tahap 1 & 2 (Fondasi & Struktur Data)
 - [x] 01_variabel.py - Variabel, tipe data, casting, konstanta (+ 5 latihan)
@@ -82,6 +82,10 @@ belajar-rust-python/
 ### Rust - Tahap 4 (Smart Pointer & Concurrency)
 - [x] 14_smart_pointer.rs - `Box`, `Rc`, `RefCell`, `Arc`, `Weak`
 - [x] 15_concurrency.rs - `thread`, `move` closure, `mpsc`, `Mutex`, `RwLock`, `Atomic`, `thread::scope`
+
+### Rust - Testing
+- [x] `12_module_cargo/src/tests_lanjutan.rs` - 13 unit test tambahan (aritmetika, geometri, teks unicode, metadata crate)
+- [x] Total unit test Cargo: 20 test (7 bawaan + 13 tambahan), dijalankan lewat `cargo test`
 
 ### Selanjutnya (Planned)
 - [ ] Rust: Async/await (`tokio`) dan pembahasan `Send`/`Sync` lebih dalam

@@ -43,10 +43,22 @@ fn main() {
 
     // 3. Nested module
     println!("\n--- NESTED MODULE ---");
-    println!("  luas lingkaran r=7  : {:.2}", geometri::luas_lingkaran(7.0));
-    println!("  keliling lingkaran r=7: {:.2}", geometri::keliling_lingkaran(7.0));
-    println!("  luas persegi sisi=4 : {:.2}", geometri::persegi::luas(4.0));
-    println!("  keliling persegi    : {:.2}", geometri::persegi::keliling(4.0));
+    println!(
+        "  luas lingkaran r=7  : {:.2}",
+        geometri::luas_lingkaran(7.0)
+    );
+    println!(
+        "  keliling lingkaran r=7: {:.2}",
+        geometri::keliling_lingkaran(7.0)
+    );
+    println!(
+        "  luas persegi sisi=4 : {:.2}",
+        geometri::persegi::luas(4.0)
+    );
+    println!(
+        "  keliling persegi    : {:.2}",
+        geometri::persegi::keliling(4.0)
+    );
 
     // 4. Module util dan re-export
     println!("\n--- MODULE UTIL ---");

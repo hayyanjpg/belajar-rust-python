@@ -39,7 +39,7 @@ Folder latihan dan catatan belajar bahasa pemrograman Rust.
 - [ ] CLI tool dengan `clap`
 - [ ] Web API dengan `axum` atau `actix-web`
 - [ ] Manajemen dependensi: `Cargo.toml`, workspace, feature flag
-- [x] Testing: unit test, integration test, benchmark
+- [x] Testing: unit test (20 test di `12_module_cargo`, termasuk 13 test di `src/tests_lanjutan.rs`), integration test, benchmark
 - [ ] Benchmark performa dan optimasi memori
 - [ ] Publish crate ke crates.io
 

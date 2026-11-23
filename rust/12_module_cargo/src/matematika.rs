@@ -1,6 +1,11 @@
 //! Module `matematika`: kumpulan fungsi dan konstanta matematika.
 
 /// Konstanta PI bisa diakses dari luar sebagai `matematika::PI`.
+///
+/// Nilainya sengaja dibulatkan agar contoh perhitungan mudah dibaca.
+/// Clippy akan mengingatkan tentang `std::f64::consts::PI`; di sini kita
+/// izinkan secara eksplisit karena ini materi belajar, bukan kode produksi.
+#[allow(clippy::approx_constant)]
 pub const PI: f64 = 3.14159;
 
 pub fn tambah(a: i32, b: i32) -> i32 {
