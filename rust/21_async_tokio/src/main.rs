@@ -48,13 +48,19 @@ async fn main() {
     let a = tugas(1, 60).await;
     let b = tugas(2, 60).await;
     println!("  hasil: {a:?}, {b:?}");
-    println!("  total waktu: {:?} (~120 ms karena berurutan)", mulai.elapsed());
+    println!(
+        "  total waktu: {:?} (~120 ms karena berurutan)",
+        mulai.elapsed()
+    );
 
     println!("\n--- 2. join! (konkuren dalam satu task) ---");
     let mulai = Instant::now();
     let (c, d) = tokio::join!(tugas(3, 60), tugas(4, 60));
     println!("  hasil: {c:?}, {d:?}");
-    println!("  total waktu: {:?} (~60 ms karena bersamaan)", mulai.elapsed());
+    println!(
+        "  total waktu: {:?} (~60 ms karena bersamaan)",
+        mulai.elapsed()
+    );
 
     println!("\n--- 3. tokio::spawn (task baru) ---");
     let mulai = Instant::now();

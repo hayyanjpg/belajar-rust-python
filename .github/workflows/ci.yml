@@ -34,7 +34,7 @@ jobs:
         run: cd python && mypy *.py
 
       - name: Run pytest
-        run: cd python && pytest 11_testing.py -v
+        run: cd python && pytest 11_testing.py test_23_tuple_set_unpacking.py -v
 
       - name: Set up Rust
         uses: actions-rs/toolchain@v1
@@ -45,8 +45,43 @@ jobs:
       - name: Run cargo fmt check
         run: cd rust/12_module_cargo && cargo fmt --check
 
-      - name: Run cargo clippy
-        run: cd rust/12_module_cargo && cargo clippy -- -D warnings
+      - name: Run cargo fmt check (materi 21 & 22)
+        run: |
+          cargo fmt --manifest-path rust/21_async_tokio/Cargo.toml --check
+          cargo fmt --manifest-path rust/22_publish_crate/Cargo.toml --check
 
-      - name: Run cargo test
+      - name: Run cargo clippy
+        run: cd rust/12_module_cargo && cargo clippy --all-targets -- -D warnings
+
+      - name: Run cargo test (materi 12)
         run: cd rust/12_module_cargo && cargo test
+
+      # 16_cli_clap.rs dan 17_web_axum.rs adalah contoh yang memakai crate
+      # eksternal, jadi tidak dikompilasi sebagai file standalone.
+      - name: Compile materi Rust standalone
+        run: |
+          mkdir -p /tmp/materi-rust
+          for file in rust/*.rs; do
+            nama=$(basename "$file" .rs)
+            case "$nama" in
+              16_cli_clap|17_web_axum)
+                echo "Lewati $nama (butuh crate eksternal)"
+                continue
+                ;;
+            esac
+            rustc --edition 2021 "$file" -o "/tmp/materi-rust/$nama"
+          done
+
+      - name: Unit test materi Rust standalone (18-20)
+        run: |
+          mkdir -p /tmp/materi-rust
+          for file in rust/18_*.rs rust/19_*.rs rust/20_*.rs; do
+            nama=$(basename "$file" .rs)
+            rustc --edition 2021 --test "$file" -o "/tmp/materi-rust/${nama}_test"
+            "/tmp/materi-rust/${nama}_test"
+          done
+
+      - name: Cargo test materi async & publish
+        run: |
+          cargo test --manifest-path rust/21_async_tokio/Cargo.toml
+          cargo test --manifest-path rust/22_publish_crate/Cargo.toml
