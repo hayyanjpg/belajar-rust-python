@@ -66,7 +66,8 @@ def demo() -> None:
     print("NamedTuple:", mhs.nama, mhs.nilai, "->", mhs._asdict())
 
     print("\n=== SET ===")
-    hobi = set("baca koding baca musik".split())
+    daftar_hobi = ["baca", "koding", "baca", "musik"]
+    hobi = set(daftar_hobi)
     print("Set otomatis unik:", hobi)
     hobi.add("olahraga")
     hobi.discard("musik")
