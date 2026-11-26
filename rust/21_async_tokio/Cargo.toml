@@ -1,0 +1,8 @@
+[package]
+name = "belajar_async_tokio"
+version = "0.1.0"
+edition = "2021"
+description = "Materi 21: async/await dan runtime tokio untuk belajar Rust"
+
+[dependencies]
+tokio = { version = "1", features = ["macros", "rt-multi-thread", "time", "sync"] }
