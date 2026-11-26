@@ -1,0 +1,12 @@
+[package]
+name = "belajar-publish-contoh"
+version = "0.1.0"
+edition = "2021"
+description = "Contoh crate kecil untuk berlatih publish ke crates.io"
+license = "MIT"
+repository = "https://github.com/hayyanjpg/belajar-rust-python"
+readme = "README.md"
+keywords = ["belajar", "contoh", "rust"]
+categories = ["development-tools"]
+
+[dependencies]
