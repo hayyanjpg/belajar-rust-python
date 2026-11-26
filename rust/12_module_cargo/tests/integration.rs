@@ -3,8 +3,8 @@
 // Jalankan dengan: cargo test
 
 use belajar_module::info_crate;
-use belajar_module::matematika::geometri::{keliling_lingkaran, luas_lingkaran};
 use belajar_module::matematika::geometri::persegi::{keliling, luas};
+use belajar_module::matematika::geometri::{keliling_lingkaran, luas_lingkaran};
 use belajar_module::matematika::{bagi, faktorial, tambah, PI};
 use belajar_module::util::teks::{hitung_kata, kapitalisasi, potong};
 
@@ -12,7 +12,10 @@ use belajar_module::util::teks::{hitung_kata, kapitalisasi, potong};
 fn info_crate_mengandung_versi() {
     let info = info_crate();
     assert!(info.starts_with("belajar_module v"));
-    assert_eq!(info, format!("belajar_module v{}", env!("CARGO_PKG_VERSION")));
+    assert_eq!(
+        info,
+        format!("belajar_module v{}", env!("CARGO_PKG_VERSION"))
+    );
 }
 
 #[test]
