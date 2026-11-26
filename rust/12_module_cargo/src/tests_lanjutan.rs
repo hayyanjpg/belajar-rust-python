@@ -33,6 +33,7 @@ fn bagi_nol_memiliki_pesan_error() {
 }
 
 #[test]
+#[allow(clippy::approx_constant)] // Nilai PI sengaja dibulatkan untuk materi belajar.
 fn konstanta_pi_sesuai_ekspektasi() {
     assert!((matematika::PI - 3.14159).abs() < f64::EPSILON);
 }
