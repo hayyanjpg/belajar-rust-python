@@ -32,7 +32,7 @@ belajar-rust-python/
 4. Standard library & tooling: venv, pip, pytest
 5. Spesialisasi: data analysis, web dev, automation, database
 
-## Progress Checklist (Updated: 2026-11-24)
+## Progress Checklist (Updated: 2026-11-26)
 
 ### Python - Tahap 1 & 2 (Fondasi & Struktur Data)
 - [x] 01_variabel.py - Variabel, tipe data, casting, konstanta (+ 5 latihan)
@@ -57,6 +57,20 @@ belajar-rust-python/
 
 ### Python - Mini Project
 - [x] 16_mini_project_kasir.py - Kasir CLI: OOP, exception, JSON, type hints, format rupiah
+
+### Python - Tahap 5 (Spesialisasi & Tooling)
+- [x] 17_data_analysis.py - `numpy`, `pandas`
+- [x] 18_visualisasi.py - `matplotlib`, `seaborn`
+- [x] 19_web_dev.py - `flask`, `fastapi`
+- [x] 20_automasi.py - `requests`, `beautifulsoup4`
+- [x] 21_database.py - `sqlite3`, SQLAlchemy
+- [x] 22_async_tooling.py - `asyncio`, `aiohttp`, `mypy`, `black`, `ruff`
+- [x] 23_tuple_set_unpacking.py - tuple, set, unpacking bintang, `enumerate`, `zip(strict=True)`
+- [x] 24_algoritma_struktur_data.py - stack, queue, linked list, bubble/merge sort, binary search
+- [x] 25_fungsional_lanjutan.py - `reduce`, `partial`, `lru_cache`, `singledispatch`, `itertools`, closure
+- [x] 26_dataclass_enum_serialisasi.py - `dataclass`, `Enum`/`IntEnum`, `asdict`, JSON
+- [x] 27_logging_argparse.py - `logging` dan CLI subcommand `argparse`
+- [x] 28_mini_project_todo.py - Todo CLI: JSON, exception, dataclass, argparse
 
 ### Rust - Tahap 1 (Fondasi)
 - [x] 01_hello_world.rs - Print, format, debug (+ 6 latihan format)
@@ -85,13 +99,22 @@ belajar-rust-python/
 
 ### Rust - Testing
 - [x] `12_module_cargo/src/tests_lanjutan.rs` - 13 unit test tambahan (aritmetika, geometri, teks unicode, metadata crate)
-- [x] Total unit test Cargo: 20 test (7 bawaan + 13 tambahan), dijalankan lewat `cargo test`
+- [x] `12_module_cargo/tests/integration.rs` - 9 integration test (API publik dari luar crate)
+- [x] Total test Cargo materi 12: 29 test (20 unit + 9 integration), dijalankan lewat `cargo test`
+
+### Rust - Tahap 5 Lanjutan (2026-11-26)
+- [x] `16_cli_clap.rs`, `17_web_axum.rs` - contoh CLI & web API (butuh crate eksternal)
+- [x] `rust/workspace/` - Cargo workspace dengan feature flag
+- [x] 18_percabangan_perulangan.rs - `if`/`else`, `loop`, `while`, `for`, labeled loop, FizzBuzz
+- [x] 19_unsafe_dasar.rs - raw pointer, `MaybeUninit`, `unsafe impl`, FFI, `static mut`
+- [x] 20_benchmark_optimasi.rs - `Instant`, `black_box`, `size_of`, `Vec::with_capacity`
+- [x] 21_async_tokio/ - `async`/`await`, `spawn`, `join!`, channel, timeout (4 test)
+- [x] 22_publish_crate/ - contoh crate + panduan `cargo publish` (3 test + 1 doctest)
 
 ### Selanjutnya (Planned)
-- [ ] Rust: Async/await (`tokio`) dan pembahasan `Send`/`Sync` lebih dalam
-- [ ] Rust: Cargo workspace, feature flag, publish crate
-- [ ] Rust: CLI (`clap`) atau web API (`axum`)
-- [ ] Python: Tuple, set, dan unpacking lanjutan
+- [ ] Rust: ubah contoh `16_cli_clap.rs` dan `17_web_axum.rs` jadi project Cargo yang bisa dijalankan
+- [ ] Python: property-based testing (Hypothesis) dan benchmarking dengan `timeit`
+- [ ] Python: packaging dengan `pyproject.toml` dan simulasi publish ke PyPI
 
 ## Cara Mulai
 
@@ -142,6 +165,9 @@ cargo test
 - Semua materi ditulis dengan komentar berbahasa Indonesia dan dilengkapi latihan.
 - File yang dibuat saat latihan (`data_latihan/`, file sementara) sudah diabaikan
   lewat `.gitignore`.
-- Materi Python 12–16 dan Rust 09–15 adalah lanjutan setelah tahap dasar.
-- `rust/12_module_cargo/` adalah project Cargo; materi Rust lainnya adalah file
-  `.rs` tunggal yang bisa dikompilasi dengan `rustc`.
+- Materi Python 12–28 dan Rust 09–22 adalah lanjutan setelah tahap dasar.
+- `rust/12_module_cargo/`, `rust/21_async_tokio/`, dan `rust/22_publish_crate/`
+  adalah project Cargo; materi Rust lainnya adalah file `.rs` tunggal yang bisa
+  dikompilasi dengan `rustc` (kecuali 16–17 yang berupa contoh dengan crate eksternal).
+- CI GitHub Actions mengompilasi file Rust standalone, menjalankan unit test
+  materi 18–20, test Python 11 & 23, serta `cargo test` untuk semua project Cargo.

@@ -14,10 +14,10 @@ Folder latihan dan catatan belajar bahasa pemrograman Python.
 
 ### Tahap 2 — Struktur Data
 - [x] List dan operasinya (indexing, slicing, method)
-- [ ] Tuple dan perbedaannya dengan list
-- [ ] Dictionary dan set
+- [x] Tuple dan perbedaannya dengan list (materi 05 & 23)
+- [x] Dictionary dan set (materi 05 & 23)
 - [x] List/dict/set comprehension
-- [ ] Unpacking, `*` operator, enumerate, zip
+- [x] Unpacking, `*` operator, `enumerate`, `zip(strict=True)` (materi 23)
 
 ### Tahap 3 — Pilar OOP & Modularisasi
 - [x] Class, object, atribut, method, `__init__`
@@ -35,18 +35,33 @@ Folder latihan dan catatan belajar bahasa pemrograman Python.
 - [x] Testing dengan `unittest` dan `pytest`
 
 ### Tahap 5 — Spesialisasi
-- [ ] Data analysis: `numpy`, `pandas`
-- [ ] Visualisasi data: `matplotlib`, `seaborn`
-- [ ] Web development: `flask` / `django` / `fastapi`
-- [ ] Automation & scripting (REST API, web scraping dengan `requests`, `beautifulsoup4`)
-- [ ] Database: `sqlite3`, `SQLAlchemy`, `psycopg`
-- [ ] Async programming: `asyncio`, `aiohttp`
-- [x] Type hints (materi 15); `mypy`, `black`, `ruff` menyusul
+- [x] Data analysis: `numpy`, `pandas` (17_data_analysis.py)
+- [x] Visualisasi data: `matplotlib`, `seaborn` (18_visualisasi.py)
+- [x] Web development: `flask`, `fastapi` (19_web_dev.py)
+- [x] Automation & scripting: `requests`, `beautifulsoup4` (20_automasi.py)
+- [x] Database: `sqlite3`, SQLAlchemy (21_database.py)
+- [x] Async programming: `asyncio`, `aiohttp` (22_async_tooling.py)
+- [x] Type hints + tooling: `mypy`, `black`, `ruff` dipakai di CI
+
+### Tahap 6 — Lanjutan (2026-11-26)
+- [x] 23_tuple_set_unpacking.py — tuple, set, unpacking bintang, `enumerate`, `zip`
+- [x] 24_algoritma_struktur_data.py — stack, queue, linked list, sorting, binary search
+- [x] 25_fungsional_lanjutan.py — `functools`, `itertools`, closure
+- [x] 26_dataclass_enum_serialisasi.py — `dataclass`, `Enum`, JSON
+- [x] 27_logging_argparse.py — `logging` dan CLI `argparse`
+- [x] 28_mini_project_todo.py — Todo CLI (JSON, exception, dataclass)
 
 ### Mini Project
 - [x] 16_mini_project_kasir.py — Kasir CLI (OOP, exception, JSON, type hints)
   - `python 16_mini_project_kasir.py` untuk demo
   - `python 16_mini_project_kasir.py --interactive` untuk mode interaktif
+- [x] 28_mini_project_todo.py — Todo CLI
+  - `python 28_mini_project_todo.py` untuk demo (memakai folder sementara)
+  - `python 28_mini_project_todo.py --berkas todo.json tambah "Belajar Rust"` untuk CLI
+
+### Testing Otomatis
+- `test_23_tuple_set_unpacking.py` — 6 test pytest untuk materi 23
+- Jalankan: `pytest 11_testing.py test_23_tuple_set_unpacking.py -v`
 
 ## Sumber Belajar
 - Python Official Tutorial — https://docs.python.org/3/tutorial/
