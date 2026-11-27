@@ -1,0 +1,37 @@
+# Materi 30 lanjutan: packaging modern dengan pyproject.toml.
+#
+# Simulasi build/publish (tidak dijalankan di CI):
+#   python -m pip install build twine
+#   python -m build
+#   twine check dist/*
+#   twine upload --repository testpypi dist/*
+
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "materi-belajar-python-hayyan"
+version = "0.1.0"
+description = "Kumpulan materi latihan belajar Python dari repository belajar-rust-python."
+readme = "README.md"
+requires-python = ">=3.10"
+license = { text = "MIT" }
+authors = [{ name = "Hayyan N" }]
+keywords = ["belajar", "python", "latihan", "pytest", "hypothesis"]
+dependencies = ["pytest>=8.0.0", "hypothesis>=6.100.0"]
+
+[project.optional-dependencies]
+dev = ["black>=24.0.0", "ruff>=0.5.0", "mypy>=1.10.0"]
+
+[project.urls]
+Homepage = "https://github.com/hayyanjpg/belajar-rust-python"
+
+[tool.setuptools]
+py-modules = ["29_property_based_testing", "30_benchmark_timeit"]
+
+[tool.black]
+line-length = 88
+
+[tool.mypy]
+python_version = "3.11"
