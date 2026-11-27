@@ -32,7 +32,7 @@ belajar-rust-python/
 4. Standard library & tooling: venv, pip, pytest
 5. Spesialisasi: data analysis, web dev, automation, database
 
-## Progress Checklist (Updated: 2026-11-26)
+## Progress Checklist (Updated: 2026-11-28)
 
 ### Python - Tahap 1 & 2 (Fondasi & Struktur Data)
 - [x] 01_variabel.py - Variabel, tipe data, casting, konstanta (+ 5 latihan)
