@@ -50,6 +50,10 @@ Folder latihan dan catatan belajar bahasa pemrograman Rust.
 - [x] 21_async_tokio/ — `async`/`await`, `spawn`, `join!`, channel, timeout
 - [x] 22_publish_crate/ — contoh crate + alur `cargo publish`
 
+### Tahap 7 — Trait Object & Generic (2026-11-28)
+- [x] 23_trait_object_dan_generic.rs — `dyn Trait`, generic bound, 3 unit test
+  - `rustc --edition 2021 --test 23_trait_object_dan_generic.rs -o materi23_test`
+
 Catatan: `16_cli_clap.rs` dan `17_web_axum.rs` adalah contoh yang memakai crate
 eksternal, jadi belum dikompilasi sebagai file standalone oleh CI.
 

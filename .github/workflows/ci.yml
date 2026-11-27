@@ -72,10 +72,10 @@ jobs:
             rustc --edition 2021 "$file" -o "/tmp/materi-rust/$nama"
           done
 
-      - name: Unit test materi Rust standalone (18-20)
+      - name: Unit test materi Rust standalone (18-20, 23)
         run: |
           mkdir -p /tmp/materi-rust
-          for file in rust/18_*.rs rust/19_*.rs rust/20_*.rs; do
+          for file in rust/18_*.rs rust/19_*.rs rust/20_*.rs rust/23_*.rs; do
             nama=$(basename "$file" .rs)
             rustc --edition 2021 --test "$file" -o "/tmp/materi-rust/${nama}_test"
             "/tmp/materi-rust/${nama}_test"

@@ -71,6 +71,9 @@ belajar-rust-python/
 - [x] 26_dataclass_enum_serialisasi.py - `dataclass`, `Enum`/`IntEnum`, `asdict`, JSON
 - [x] 27_logging_argparse.py - `logging` dan CLI subcommand `argparse`
 - [x] 28_mini_project_todo.py - Todo CLI: JSON, exception, dataclass, argparse
+- [x] 29_property_based_testing.py - Hypothesis: strategy, invansi, properti sorting
+- [x] 30_benchmark_timeit.py - `timeit`, `repeat`, perbandingan `+` vs `join` dan list vs set
+- [x] `python/pyproject.toml` - packaging modern + simulasi publish ke TestPyPI
 
 ### Rust - Tahap 1 (Fondasi)
 - [x] 01_hello_world.rs - Print, format, debug (+ 6 latihan format)
@@ -110,11 +113,11 @@ belajar-rust-python/
 - [x] 20_benchmark_optimasi.rs - `Instant`, `black_box`, `size_of`, `Vec::with_capacity`
 - [x] 21_async_tokio/ - `async`/`await`, `spawn`, `join!`, channel, timeout (4 test)
 - [x] 22_publish_crate/ - contoh crate + panduan `cargo publish` (3 test + 1 doctest)
+- [x] 23_trait_object_dan_generic.rs - `dyn Trait`, generic bound, 3 unit test
 
 ### Selanjutnya (Planned)
 - [ ] Rust: ubah contoh `16_cli_clap.rs` dan `17_web_axum.rs` jadi project Cargo yang bisa dijalankan
-- [ ] Python: property-based testing (Hypothesis) dan benchmarking dengan `timeit`
-- [ ] Python: packaging dengan `pyproject.toml` dan simulasi publish ke PyPI
+- [ ] Python: integrasi properti Hypothesis & benchmark timeit ke suite pytest
 
 ## Cara Mulai
 
@@ -170,4 +173,4 @@ cargo test
   adalah project Cargo; materi Rust lainnya adalah file `.rs` tunggal yang bisa
   dikompilasi dengan `rustc` (kecuali 16–17 yang berupa contoh dengan crate eksternal).
 - CI GitHub Actions mengompilasi file Rust standalone, menjalankan unit test
-  materi 18–20, test Python 11 & 23, serta `cargo test` untuk semua project Cargo.
+  materi 18–20 dan 23, test Python 11 & 23, serta `cargo test` untuk semua project Cargo.

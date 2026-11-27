@@ -51,6 +51,11 @@ Folder latihan dan catatan belajar bahasa pemrograman Python.
 - [x] 27_logging_argparse.py — `logging` dan CLI `argparse`
 - [x] 28_mini_project_todo.py — Todo CLI (JSON, exception, dataclass)
 
+### Tahap 7 — Testing & Tooling Lanjutan (2026-11-28)
+- [x] 29_property_based_testing.py — Hypothesis: strategy, `@given`, properti invansi & sorting
+- [x] 30_benchmark_timeit.py — benchmark mikro dengan `timeit`/`repeat`
+- [x] pyproject.toml — packaging `setuptools` + simulasi build/publish ke TestPyPI
+
 ### Mini Project
 - [x] 16_mini_project_kasir.py — Kasir CLI (OOP, exception, JSON, type hints)
   - `python 16_mini_project_kasir.py` untuk demo
